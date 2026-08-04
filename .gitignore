@@ -1,0 +1,26 @@
+node_modules/
+dist/
+build/
+out/
+.next/
+.turbo/
+coverage/
+*.tsbuildinfo
+
+# Test + build artefacts
+playwright-report/
+test-results/
+blob-report/
+.playwright/
+*.tgz
+.package-test/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.vercel
+
+# OS
+.DS_Store
+Thumbs.db

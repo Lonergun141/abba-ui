@@ -1,0 +1,46 @@
+.root {
+  box-sizing: border-box;
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: var(--abba-radius-full);
+  border-style: solid;
+  border-color: currentcolor;
+  border-block-start-color: transparent;
+  animation: abba-spinner-rotate var(--abba-duration-slow) linear infinite;
+}
+
+.sm {
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+  border-width: 1.5px;
+}
+
+.md {
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  border-width: 2px;
+}
+
+.lg {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border-width: 2.5px;
+}
+
+@keyframes abba-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/**
+ * Users who ask for reduced motion still need to know the thing is busy, so the
+ * spinner degrades to a static ring rather than disappearing.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    animation: none;
+    border-block-start-color: currentcolor;
+    opacity: 0.6;
+  }
+}

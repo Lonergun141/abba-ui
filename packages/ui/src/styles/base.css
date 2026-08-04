@@ -1,0 +1,38 @@
+/**
+ * Base layer.
+ *
+ * Deliberately minimal: a component library has no business resetting the
+ * consuming application's document. Only two global rules ship here, and both
+ * are opt-in via an explicit class or a media query.
+ */
+
+/**
+ * Optional surface class. Applications may put this on <body> to adopt the
+ * ABBA background/foreground pair and font stack. Nothing requires it.
+ */
+.abba-surface {
+  background-color: var(--abba-background);
+  color: var(--abba-foreground);
+  font-family: var(--abba-font-sans);
+  font-size: var(--abba-font-size-md);
+  line-height: var(--abba-line-height-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/**
+ * Respect the user's motion preference across every ABBA component.
+ *
+ * Scoped to `[class*="abba-"]` so the library never overrides animation the
+ * host application deliberately kept.
+ */
+@media (prefers-reduced-motion: reduce) {
+  [class*="abba-"],
+  [class*="abba-"]::before,
+  [class*="abba-"]::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

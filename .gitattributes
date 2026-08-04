@@ -1,0 +1,13 @@
+# Normalise to LF in the repository regardless of contributor platform.
+# Prettier is configured with endOfLine: "lf"; without this, checkouts on
+# Windows would produce a diff against every formatted file.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+pnpm-lock.yaml linguist-generated=true

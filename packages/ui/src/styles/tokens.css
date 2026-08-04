@@ -1,0 +1,297 @@
+/**
+ * ABBA Design System — design tokens.
+ *
+ * Every value an application might reasonably want to rebrand is a CSS custom
+ * property. Components reference only these tokens, never literal colours, so a
+ * theme override in the consuming app is enough to restyle the whole system.
+ *
+ * Prefix is `--abba-` rather than a generic `--ui-` so that another library or
+ * application using the obvious prefix cannot silently collide with these
+ * values.
+ */
+
+:root {
+  /* ---------------------------------------------------------------------
+   * Palette — Cedar (brand)
+   * A deep teal-green. Cedar 600 is the default primary and clears WCAG AA
+   * against white text (6.3:1).
+   * ------------------------------------------------------------------- */
+  --abba-cedar-50: #edf6f3;
+  --abba-cedar-100: #d2e9e2;
+  --abba-cedar-200: #a6d3c7;
+  --abba-cedar-300: #74b8a8;
+  --abba-cedar-400: #45988a;
+  --abba-cedar-500: #2a7c6e;
+  --abba-cedar-600: #1f6b60;
+  --abba-cedar-700: #175449;
+  --abba-cedar-800: #123f38;
+  --abba-cedar-900: #0d2c27;
+  --abba-cedar-950: #071a17;
+
+  /* ---------------------------------------------------------------------
+   * Palette — Ember (accent)
+   * Warm burnt orange. Ember 500 is nudged darker than a pure mid-tone so it
+   * clears AA (5.0:1) with white text rather than landing at 4.4:1.
+   * ------------------------------------------------------------------- */
+  --abba-ember-50: #fdf3ea;
+  --abba-ember-100: #f9e0c9;
+  --abba-ember-200: #f0c094;
+  --abba-ember-300: #e39d5f;
+  --abba-ember-400: #d27e33;
+  --abba-ember-500: #a85714;
+  --abba-ember-600: #984e13;
+  --abba-ember-700: #7a3d10;
+  --abba-ember-800: #5c2e0d;
+  --abba-ember-900: #3f200a;
+
+  /* ---------------------------------------------------------------------
+   * Palette — Neutrals
+   * Warm-tinted rather than pure grey. The warm cast is deliberate: it is the
+   * single most effective defence against the system reading as templated.
+   * ------------------------------------------------------------------- */
+  --abba-neutral-0: #ffffff;
+  --abba-neutral-25: #fcfbf9;
+  --abba-neutral-50: #faf9f7;
+  --abba-neutral-100: #f4f2ee;
+  --abba-neutral-200: #e8e4dd;
+  --abba-neutral-300: #d6d0c6;
+  --abba-neutral-400: #b0a89c;
+  --abba-neutral-500: #857c71;
+  --abba-neutral-600: #635b52;
+  --abba-neutral-700: #47413a;
+  --abba-neutral-800: #2e2925;
+  --abba-neutral-900: #1c1815;
+  --abba-neutral-950: #12100e;
+
+  /* ---------------------------------------------------------------------
+   * Semantic roles
+   * ------------------------------------------------------------------- */
+  --abba-primary: var(--abba-cedar-600);
+  --abba-primary-hover: var(--abba-cedar-700);
+  --abba-primary-active: var(--abba-cedar-800);
+  --abba-primary-foreground: var(--abba-neutral-0);
+  --abba-primary-subtle: var(--abba-cedar-50);
+  --abba-primary-subtle-foreground: var(--abba-cedar-800);
+
+  --abba-accent: var(--abba-ember-500);
+  --abba-accent-hover: var(--abba-ember-600);
+  --abba-accent-active: var(--abba-ember-700);
+  --abba-accent-foreground: var(--abba-neutral-0);
+  --abba-accent-subtle: var(--abba-ember-50);
+  --abba-accent-subtle-foreground: var(--abba-ember-800);
+
+  /* State colours. Warning uses dark foreground: white on amber cannot reach
+   * AA without pushing the hue muddy. */
+  --abba-success: #1f7a4d;
+  --abba-success-foreground: var(--abba-neutral-0);
+  --abba-success-subtle: #e8f5ee;
+  --abba-success-subtle-foreground: #10502f;
+  --abba-success-border: #a8d8be;
+
+  --abba-warning: #b7791f;
+  --abba-warning-foreground: var(--abba-neutral-900);
+  --abba-warning-subtle: #fcf3e3;
+  --abba-warning-subtle-foreground: #7a4e10;
+  --abba-warning-border: #efd49b;
+
+  --abba-danger: #b42318;
+  --abba-danger-hover: #94170e;
+  --abba-danger-active: #7a1109;
+  --abba-danger-foreground: var(--abba-neutral-0);
+  --abba-danger-subtle: #fdecea;
+  --abba-danger-subtle-foreground: #7a1109;
+  --abba-danger-border: #f3b4ae;
+
+  --abba-info: #2c6ba8;
+  --abba-info-foreground: var(--abba-neutral-0);
+  --abba-info-subtle: #e9f1f9;
+  --abba-info-subtle-foreground: #1c4a75;
+  --abba-info-border: #aecbe6;
+
+  /* ---------------------------------------------------------------------
+   * Surfaces
+   * ------------------------------------------------------------------- */
+  --abba-background: var(--abba-neutral-0);
+  --abba-background-subtle: var(--abba-neutral-50);
+  --abba-background-raised: var(--abba-neutral-0);
+  --abba-foreground: var(--abba-neutral-900);
+  --abba-muted: var(--abba-neutral-100);
+  --abba-muted-foreground: var(--abba-neutral-600);
+  --abba-overlay: rgb(18 16 14 / 55%);
+
+  --abba-border: var(--abba-neutral-300);
+  --abba-border-subtle: var(--abba-neutral-200);
+  --abba-border-strong: var(--abba-neutral-400);
+
+  /* ---------------------------------------------------------------------
+   * Typography
+   * No webfont is downloaded by the library. Applications may override
+   * --abba-font-sans with their own loaded family.
+   * ------------------------------------------------------------------- */
+  --abba-font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --abba-font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+
+  --abba-font-size-xs: 0.75rem;
+  --abba-font-size-sm: 0.875rem;
+  --abba-font-size-md: 1rem;
+  --abba-font-size-lg: 1.125rem;
+  --abba-font-size-xl: 1.375rem;
+  --abba-font-size-2xl: 1.75rem;
+  --abba-font-size-3xl: 2.25rem;
+  --abba-font-size-4xl: 3rem;
+
+  --abba-font-weight-regular: 400;
+  --abba-font-weight-medium: 500;
+  --abba-font-weight-semibold: 600;
+  --abba-font-weight-bold: 700;
+
+  --abba-line-height-tight: 1.2;
+  --abba-line-height-snug: 1.35;
+  --abba-line-height-normal: 1.55;
+  --abba-line-height-relaxed: 1.75;
+
+  --abba-letter-spacing-tight: -0.018em;
+  --abba-letter-spacing-normal: 0;
+  --abba-letter-spacing-wide: 0.04em;
+
+  /* ---------------------------------------------------------------------
+   * Spacing — 4px base
+   * ------------------------------------------------------------------- */
+  --abba-space-0: 0;
+  --abba-space-1: 0.25rem;
+  --abba-space-2: 0.5rem;
+  --abba-space-3: 0.75rem;
+  --abba-space-4: 1rem;
+  --abba-space-5: 1.25rem;
+  --abba-space-6: 1.5rem;
+  --abba-space-8: 2rem;
+  --abba-space-10: 2.5rem;
+  --abba-space-12: 3rem;
+  --abba-space-16: 4rem;
+  --abba-space-20: 5rem;
+  --abba-space-24: 6rem;
+
+  /* ---------------------------------------------------------------------
+   * Radii
+   * ------------------------------------------------------------------- */
+  --abba-radius-none: 0;
+  --abba-radius-sm: 6px;
+  --abba-radius-md: 10px;
+  --abba-radius-lg: 14px;
+  --abba-radius-xl: 20px;
+  --abba-radius-full: 9999px;
+
+  /* ---------------------------------------------------------------------
+   * Elevation — warm-tinted shadows, not neutral black
+   * ------------------------------------------------------------------- */
+  --abba-shadow-xs: 0 1px 2px rgb(28 24 21 / 6%);
+  --abba-shadow-sm: 0 1px 3px rgb(28 24 21 / 8%), 0 1px 2px rgb(28 24 21 / 5%);
+  --abba-shadow-md: 0 4px 10px rgb(28 24 21 / 8%), 0 2px 4px rgb(28 24 21 / 5%);
+  --abba-shadow-lg: 0 12px 24px rgb(28 24 21 / 10%), 0 4px 8px rgb(28 24 21 / 5%);
+  --abba-shadow-xl: 0 24px 48px rgb(28 24 21 / 14%), 0 8px 16px rgb(28 24 21 / 6%);
+
+  /* ---------------------------------------------------------------------
+   * Z-index
+   * ------------------------------------------------------------------- */
+  --abba-z-base: 0;
+  --abba-z-raised: 10;
+  --abba-z-sticky: 100;
+  --abba-z-overlay: 1000;
+  --abba-z-modal: 1100;
+  --abba-z-popover: 1200;
+  --abba-z-toast: 1300;
+  --abba-z-tooltip: 1400;
+
+  /* ---------------------------------------------------------------------
+   * Motion
+   * ------------------------------------------------------------------- */
+  --abba-duration-instant: 80ms;
+  --abba-duration-fast: 140ms;
+  --abba-duration-normal: 220ms;
+  --abba-duration-slow: 320ms;
+  --abba-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --abba-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --abba-ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ---------------------------------------------------------------------
+   * Focus + disabled
+   * ------------------------------------------------------------------- */
+  --abba-focus-ring: var(--abba-cedar-300);
+  --abba-focus-ring-width: 3px;
+  --abba-focus-ring-offset: 2px;
+  --abba-disabled-opacity: 0.55;
+}
+
+/**
+ * Dark theme.
+ *
+ * Ships under both selectors so the library drops into either convention
+ * without the application having to adapt: `[data-theme="dark"]` (used by the
+ * ABBA docs site) and `.dark` (used by Tailwind and next-themes defaults).
+ */
+[data-theme="dark"],
+.dark {
+  --abba-primary: var(--abba-cedar-400);
+  --abba-primary-hover: var(--abba-cedar-300);
+  --abba-primary-active: var(--abba-cedar-200);
+  --abba-primary-foreground: var(--abba-cedar-950);
+  --abba-primary-subtle: var(--abba-cedar-900);
+  --abba-primary-subtle-foreground: var(--abba-cedar-100);
+
+  --abba-accent: var(--abba-ember-300);
+  --abba-accent-hover: var(--abba-ember-200);
+  --abba-accent-active: var(--abba-ember-100);
+  --abba-accent-foreground: var(--abba-ember-900);
+  --abba-accent-subtle: var(--abba-ember-900);
+  --abba-accent-subtle-foreground: var(--abba-ember-100);
+
+  --abba-success: #4ab883;
+  --abba-success-foreground: #052e1b;
+  --abba-success-subtle: #10301f;
+  --abba-success-subtle-foreground: #a8e5c5;
+  --abba-success-border: #1f5c3c;
+
+  --abba-warning: #e0a94b;
+  --abba-warning-foreground: #2e1e05;
+  --abba-warning-subtle: #33260f;
+  --abba-warning-subtle-foreground: #f4d7a1;
+  --abba-warning-border: #6b4d19;
+
+  --abba-danger: #f0776a;
+  --abba-danger-hover: #f79287;
+  --abba-danger-active: #fbaba2;
+  --abba-danger-foreground: #3c0a05;
+  --abba-danger-subtle: #3a1512;
+  --abba-danger-subtle-foreground: #f8c4bd;
+  --abba-danger-border: #6e2820;
+
+  --abba-info: #6ba7dd;
+  --abba-info-foreground: #08213a;
+  --abba-info-subtle: #14293c;
+  --abba-info-subtle-foreground: #bcd9f2;
+  --abba-info-border: #2b4f73;
+
+  --abba-background: var(--abba-neutral-950);
+  --abba-background-subtle: #171412;
+  --abba-background-raised: #1f1b18;
+  --abba-foreground: var(--abba-neutral-50);
+  --abba-muted: #26221e;
+  --abba-muted-foreground: var(--abba-neutral-400);
+  --abba-overlay: rgb(7 6 5 / 70%);
+
+  --abba-border: #3a342e;
+  --abba-border-subtle: #2b2622;
+  --abba-border-strong: #524a42;
+
+  --abba-shadow-xs: 0 1px 2px rgb(0 0 0 / 40%);
+  --abba-shadow-sm: 0 1px 3px rgb(0 0 0 / 45%), 0 1px 2px rgb(0 0 0 / 35%);
+  --abba-shadow-md: 0 4px 10px rgb(0 0 0 / 50%), 0 2px 4px rgb(0 0 0 / 35%);
+  --abba-shadow-lg: 0 12px 24px rgb(0 0 0 / 55%), 0 4px 8px rgb(0 0 0 / 35%);
+  --abba-shadow-xl: 0 24px 48px rgb(0 0 0 / 60%), 0 8px 16px rgb(0 0 0 / 40%);
+
+  --abba-focus-ring: var(--abba-cedar-500);
+}

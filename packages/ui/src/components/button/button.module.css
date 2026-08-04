@@ -1,0 +1,137 @@
+.root {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--abba-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--abba-radius-md);
+  font-family: var(--abba-font-sans);
+  font-weight: var(--abba-font-weight-medium);
+  line-height: var(--abba-line-height-tight);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--abba-duration-fast) var(--abba-ease-standard),
+    border-color var(--abba-duration-fast) var(--abba-ease-standard),
+    color var(--abba-duration-fast) var(--abba-ease-standard),
+    box-shadow var(--abba-duration-fast) var(--abba-ease-standard);
+}
+
+.root:focus-visible {
+  outline: var(--abba-focus-ring-width) solid var(--abba-focus-ring);
+  outline-offset: var(--abba-focus-ring-offset);
+}
+
+/* `:disabled` covers <button>; `[aria-disabled]` covers asChild anchors. */
+.root:disabled,
+.root[aria-disabled="true"] {
+  opacity: var(--abba-disabled-opacity);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ sizes */
+
+.sm {
+  block-size: 2rem;
+  padding-inline: var(--abba-space-3);
+  font-size: var(--abba-font-size-sm);
+}
+
+.md {
+  block-size: 2.5rem;
+  padding-inline: var(--abba-space-4);
+  font-size: var(--abba-font-size-sm);
+}
+
+.lg {
+  block-size: 3rem;
+  padding-inline: var(--abba-space-6);
+  font-size: var(--abba-font-size-md);
+}
+
+/* --------------------------------------------------------------- variants */
+
+.primary {
+  background-color: var(--abba-primary);
+  color: var(--abba-primary-foreground);
+  box-shadow: var(--abba-shadow-xs);
+}
+
+.primary:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--abba-primary-hover);
+}
+
+.primary:active:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--abba-primary-active);
+}
+
+.secondary {
+  background-color: var(--abba-muted);
+  color: var(--abba-foreground);
+}
+
+.secondary:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--abba-neutral-200);
+}
+
+.outline {
+  background-color: transparent;
+  border-color: var(--abba-border);
+  color: var(--abba-foreground);
+}
+
+.outline:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--abba-muted);
+  border-color: var(--abba-border-strong);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--abba-foreground);
+}
+
+.ghost:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--abba-muted);
+}
+
+.danger {
+  background-color: var(--abba-danger);
+  color: var(--abba-danger-foreground);
+  box-shadow: var(--abba-shadow-xs);
+}
+
+.danger:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--abba-danger-hover);
+}
+
+.danger:active:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--abba-danger-active);
+}
+
+/* ------------------------------------------------------------------ state */
+
+.fullWidth {
+  inline-size: 100%;
+}
+
+/**
+ * While loading, the label stays in the layout so the button does not resize
+ * and shift surrounding content, but is hidden from view and from assistive
+ * technology — `aria-busy` on the root is what gets announced.
+ */
+.loading .label {
+  visibility: hidden;
+}
+
+.spinnerSlot {
+  position: absolute;
+  display: inline-flex;
+}
+
+.loadingRoot {
+  position: relative;
+}
