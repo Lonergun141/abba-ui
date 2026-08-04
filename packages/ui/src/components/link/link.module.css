@@ -1,0 +1,42 @@
+.root {
+  display: inline;
+  border-radius: var(--abba-radius-sm);
+  color: var(--abba-primary);
+  font-family: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  transition: color var(--abba-duration-fast) var(--abba-ease-standard);
+}
+
+.root:hover {
+  color: var(--abba-primary-hover);
+}
+
+.root:focus-visible {
+  outline: var(--abba-focus-ring-width) solid var(--abba-focus-ring);
+  outline-offset: var(--abba-focus-ring-offset);
+}
+
+.always {
+  text-decoration-line: underline;
+}
+
+.hover {
+  text-decoration-line: none;
+}
+
+.hover:hover {
+  text-decoration-line: underline;
+}
+
+.none {
+  text-decoration-line: none;
+}
+
+.externalIcon {
+  display: inline-block;
+  inline-size: 0.7em;
+  block-size: 0.7em;
+  margin-inline-start: 0.25em;
+  vertical-align: baseline;
+}

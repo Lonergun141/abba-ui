@@ -1,0 +1,28 @@
+.root {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--abba-space-1);
+  margin: 0;
+  font-family: var(--abba-font-sans);
+  font-size: var(--abba-font-size-xs);
+  line-height: var(--abba-line-height-snug);
+}
+
+.description {
+  color: var(--abba-muted-foreground);
+}
+
+.error {
+  color: var(--abba-danger);
+}
+
+.success {
+  color: var(--abba-success);
+}
+
+.icon {
+  flex-shrink: 0;
+  inline-size: 0.875em;
+  block-size: 0.875em;
+  margin-block-start: 0.15em;
+}

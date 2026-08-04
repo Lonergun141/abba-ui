@@ -1,0 +1,96 @@
+.root {
+  margin: 0;
+  font-family: var(--abba-font-sans);
+  color: var(--abba-foreground);
+}
+
+/* sizes */
+.xs {
+  font-size: var(--abba-font-size-xs);
+}
+.sm {
+  font-size: var(--abba-font-size-sm);
+}
+.md {
+  font-size: var(--abba-font-size-md);
+}
+.lg {
+  font-size: var(--abba-font-size-lg);
+}
+.xl {
+  font-size: var(--abba-font-size-xl);
+}
+
+/* weights */
+.regular {
+  font-weight: var(--abba-font-weight-regular);
+}
+.medium {
+  font-weight: var(--abba-font-weight-medium);
+}
+.semibold {
+  font-weight: var(--abba-font-weight-semibold);
+}
+.bold {
+  font-weight: var(--abba-font-weight-bold);
+}
+
+/* tones */
+.default {
+  color: var(--abba-foreground);
+}
+.muted {
+  color: var(--abba-muted-foreground);
+}
+.primary {
+  color: var(--abba-primary);
+}
+.accent {
+  color: var(--abba-accent);
+}
+.success {
+  color: var(--abba-success);
+}
+.warning {
+  color: var(--abba-warning-subtle-foreground);
+}
+.danger {
+  color: var(--abba-danger);
+}
+
+/* leading */
+.tight {
+  line-height: var(--abba-line-height-tight);
+}
+.snug {
+  line-height: var(--abba-line-height-snug);
+}
+.normal {
+  line-height: var(--abba-line-height-normal);
+}
+.relaxed {
+  line-height: var(--abba-line-height-relaxed);
+}
+
+/* alignment */
+.start {
+  text-align: start;
+}
+.center {
+  text-align: center;
+}
+.end {
+  text-align: end;
+}
+
+/**
+ * Single-line truncation. `min-width: 0` matters: a truncating element inside a
+ * flex container will otherwise refuse to shrink below its content width.
+ */
+.truncate {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

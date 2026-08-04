@@ -1,0 +1,36 @@
+.root {
+  margin: 0;
+  font-family: var(--abba-font-sans);
+  font-weight: var(--abba-font-weight-semibold);
+  line-height: var(--abba-line-height-tight);
+  letter-spacing: var(--abba-letter-spacing-tight);
+  color: var(--abba-foreground);
+  text-wrap: balance;
+}
+
+.sm {
+  font-size: var(--abba-font-size-lg);
+}
+.md {
+  font-size: var(--abba-font-size-xl);
+}
+.lg {
+  font-size: var(--abba-font-size-2xl);
+}
+.xl {
+  font-size: var(--abba-font-size-3xl);
+}
+.display {
+  font-size: var(--abba-font-size-4xl);
+  font-weight: var(--abba-font-weight-bold);
+}
+
+.default {
+  color: var(--abba-foreground);
+}
+.muted {
+  color: var(--abba-muted-foreground);
+}
+.primary {
+  color: var(--abba-primary);
+}

@@ -1,0 +1,56 @@
+.root {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: 5rem;
+  padding: var(--abba-space-3);
+  background-color: var(--abba-background);
+  border: 1px solid var(--abba-border);
+  border-radius: var(--abba-radius-md);
+  color: var(--abba-foreground);
+  font-family: var(--abba-font-sans);
+  font-size: var(--abba-font-size-sm);
+  line-height: var(--abba-line-height-normal);
+  transition:
+    border-color var(--abba-duration-fast) var(--abba-ease-standard),
+    box-shadow var(--abba-duration-fast) var(--abba-ease-standard);
+}
+
+.root::placeholder {
+  color: var(--abba-muted-foreground);
+}
+
+.root:hover:not(:disabled):not([aria-invalid="true"]) {
+  border-color: var(--abba-border-strong);
+}
+
+.root:focus-visible {
+  outline: var(--abba-focus-ring-width) solid var(--abba-focus-ring);
+  outline-offset: 0;
+  border-color: var(--abba-primary);
+}
+
+.root:disabled {
+  background-color: var(--abba-muted);
+  opacity: var(--abba-disabled-opacity);
+  cursor: not-allowed;
+}
+
+.root[aria-invalid="true"] {
+  border-color: var(--abba-danger);
+}
+
+.resizeNone {
+  resize: none;
+}
+.resizeVertical {
+  resize: vertical;
+}
+.resizeBoth {
+  resize: both;
+}
+
+.autoSize {
+  /* field-sizing grows the control with its content where supported; the
+     min-block-size above remains the floor everywhere else. */
+  field-sizing: content;
+}

@@ -1,0 +1,126 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--abba-space-1);
+  border: 1px solid transparent;
+  border-radius: var(--abba-radius-full);
+  font-family: var(--abba-font-sans);
+  font-weight: var(--abba-font-weight-medium);
+  line-height: var(--abba-line-height-tight);
+  white-space: nowrap;
+}
+
+.sm {
+  padding: 0.125rem var(--abba-space-2);
+  font-size: var(--abba-font-size-xs);
+}
+
+.md {
+  padding: 0.25rem var(--abba-space-3);
+  font-size: var(--abba-font-size-xs);
+}
+
+.lg {
+  padding: 0.375rem var(--abba-space-3);
+  font-size: var(--abba-font-size-sm);
+}
+
+/* subtle: tinted background, readable foreground */
+.subtle.neutral {
+  background-color: var(--abba-muted);
+  color: var(--abba-muted-foreground);
+}
+.subtle.primary {
+  background-color: var(--abba-primary-subtle);
+  color: var(--abba-primary-subtle-foreground);
+}
+.subtle.accent {
+  background-color: var(--abba-accent-subtle);
+  color: var(--abba-accent-subtle-foreground);
+}
+.subtle.success {
+  background-color: var(--abba-success-subtle);
+  color: var(--abba-success-subtle-foreground);
+}
+.subtle.warning {
+  background-color: var(--abba-warning-subtle);
+  color: var(--abba-warning-subtle-foreground);
+}
+.subtle.danger {
+  background-color: var(--abba-danger-subtle);
+  color: var(--abba-danger-subtle-foreground);
+}
+.subtle.info {
+  background-color: var(--abba-info-subtle);
+  color: var(--abba-info-subtle-foreground);
+}
+
+/* solid: full-strength background */
+.solid.neutral {
+  background-color: var(--abba-neutral-700);
+  color: var(--abba-neutral-0);
+}
+.solid.primary {
+  background-color: var(--abba-primary);
+  color: var(--abba-primary-foreground);
+}
+.solid.accent {
+  background-color: var(--abba-accent);
+  color: var(--abba-accent-foreground);
+}
+.solid.success {
+  background-color: var(--abba-success);
+  color: var(--abba-success-foreground);
+}
+.solid.warning {
+  background-color: var(--abba-warning);
+  color: var(--abba-warning-foreground);
+}
+.solid.danger {
+  background-color: var(--abba-danger);
+  color: var(--abba-danger-foreground);
+}
+.solid.info {
+  background-color: var(--abba-info);
+  color: var(--abba-info-foreground);
+}
+
+/* outline: border only */
+.outline {
+  background-color: transparent;
+}
+.outline.neutral {
+  border-color: var(--abba-border-strong);
+  color: var(--abba-muted-foreground);
+}
+.outline.primary {
+  border-color: var(--abba-primary);
+  color: var(--abba-primary);
+}
+.outline.accent {
+  border-color: var(--abba-accent);
+  color: var(--abba-accent);
+}
+.outline.success {
+  border-color: var(--abba-success);
+  color: var(--abba-success);
+}
+.outline.warning {
+  border-color: var(--abba-warning);
+  color: var(--abba-warning-subtle-foreground);
+}
+.outline.danger {
+  border-color: var(--abba-danger);
+  color: var(--abba-danger);
+}
+.outline.info {
+  border-color: var(--abba-info);
+  color: var(--abba-info);
+}
+
+.dot {
+  inline-size: 0.5em;
+  block-size: 0.5em;
+  border-radius: var(--abba-radius-full);
+  background-color: currentcolor;
+}

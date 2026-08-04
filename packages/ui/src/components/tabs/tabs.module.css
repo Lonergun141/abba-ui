@@ -1,0 +1,84 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abba-space-4);
+  font-family: var(--abba-font-sans);
+}
+
+.list {
+  display: flex;
+  gap: var(--abba-space-1);
+  /* Many tabs on a narrow viewport scroll rather than wrap into a broken grid. */
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.line {
+  border-block-end: 1px solid var(--abba-border-subtle);
+}
+
+.enclosed {
+  padding: var(--abba-space-1);
+  background-color: var(--abba-muted);
+  border-radius: var(--abba-radius-md);
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--abba-space-2);
+  padding: var(--abba-space-2) var(--abba-space-3);
+  background: none;
+  border: 0;
+  color: var(--abba-muted-foreground);
+  font-family: inherit;
+  font-size: var(--abba-font-size-sm);
+  font-weight: var(--abba-font-weight-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color var(--abba-duration-fast) var(--abba-ease-standard),
+    background-color var(--abba-duration-fast) var(--abba-ease-standard),
+    border-color var(--abba-duration-fast) var(--abba-ease-standard);
+}
+
+.trigger:hover:not([data-disabled]) {
+  color: var(--abba-foreground);
+}
+
+.trigger:focus-visible {
+  outline: var(--abba-focus-ring-width) solid var(--abba-focus-ring);
+  outline-offset: -1px;
+  border-radius: var(--abba-radius-sm);
+}
+
+.trigger[data-disabled] {
+  opacity: var(--abba-disabled-opacity);
+  cursor: not-allowed;
+}
+
+.line .trigger {
+  border-block-end: 2px solid transparent;
+  margin-block-end: -1px;
+}
+
+.line .trigger[data-state="active"] {
+  border-block-end-color: var(--abba-primary);
+  color: var(--abba-primary);
+}
+
+.enclosed .trigger {
+  border-radius: var(--abba-radius-sm);
+}
+
+.enclosed .trigger[data-state="active"] {
+  background-color: var(--abba-background-raised);
+  box-shadow: var(--abba-shadow-xs);
+  color: var(--abba-foreground);
+}
+
+.panel:focus-visible {
+  outline: var(--abba-focus-ring-width) solid var(--abba-focus-ring);
+  outline-offset: var(--abba-focus-ring-offset);
+  border-radius: var(--abba-radius-sm);
+}

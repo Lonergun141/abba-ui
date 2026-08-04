@@ -1,0 +1,18 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--abba-space-1);
+  font-family: var(--abba-font-sans);
+  font-size: var(--abba-font-size-sm);
+  font-weight: var(--abba-font-weight-medium);
+  line-height: var(--abba-line-height-snug);
+  color: var(--abba-foreground);
+}
+
+.disabled {
+  opacity: var(--abba-disabled-opacity);
+}
+
+.required {
+  color: var(--abba-danger);
+}

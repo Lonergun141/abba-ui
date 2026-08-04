@@ -1,0 +1,46 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+}
+
+/**
+ * Buttons are joined into one control: inner radii are removed and borders are
+ * collapsed so adjacent edges do not double up.
+ */
+.attached > *:not(:first-child) {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  margin-inline-start: -1px;
+}
+
+.attached > *:not(:last-child) {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+/* Keep the focus ring of the active button above its neighbours. */
+.attached > *:focus-visible {
+  position: relative;
+  z-index: var(--abba-z-raised);
+}
+
+.spaced {
+  gap: var(--abba-space-2);
+}
+
+.vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.vertical.attached > *:not(:first-child) {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  margin-inline-start: 0;
+  margin-block-start: -1px;
+}
+
+.vertical.attached > *:not(:last-child) {
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}

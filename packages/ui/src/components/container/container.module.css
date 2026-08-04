@@ -1,0 +1,35 @@
+.root {
+  box-sizing: border-box;
+  inline-size: 100%;
+  margin-inline: auto;
+}
+
+.padded {
+  padding-inline: var(--abba-space-4);
+}
+
+@media (min-width: 48rem) {
+  .padded {
+    padding-inline: var(--abba-space-6);
+  }
+}
+
+.sm {
+  max-inline-size: 40rem;
+}
+
+.md {
+  max-inline-size: 52rem;
+}
+
+.lg {
+  max-inline-size: 64rem;
+}
+
+.xl {
+  max-inline-size: 80rem;
+}
+
+.full {
+  max-inline-size: none;
+}

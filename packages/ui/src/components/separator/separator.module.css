@@ -1,0 +1,16 @@
+.root {
+  flex-shrink: 0;
+  background-color: var(--abba-border);
+  border: 0;
+}
+
+.horizontal {
+  inline-size: 100%;
+  block-size: 1px;
+}
+
+.vertical {
+  inline-size: 1px;
+  block-size: 100%;
+  align-self: stretch;
+}

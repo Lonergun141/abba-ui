@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abba-space-2);
+  inline-size: 100%;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-inline-size: 0;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abba-space-1);
+}

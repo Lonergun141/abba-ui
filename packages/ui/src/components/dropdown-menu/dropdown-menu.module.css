@@ -1,0 +1,78 @@
+.content {
+  z-index: var(--abba-z-popover);
+  min-inline-size: 11rem;
+  max-block-size: var(--radix-dropdown-menu-content-available-height);
+  overflow-y: auto;
+  padding: var(--abba-space-1);
+  background-color: var(--abba-background-raised);
+  border: 1px solid var(--abba-border-subtle);
+  border-radius: var(--abba-radius-md);
+  box-shadow: var(--abba-shadow-lg);
+  color: var(--abba-foreground);
+  font-family: var(--abba-font-sans);
+  animation: abba-menu-in var(--abba-duration-fast) var(--abba-ease-out);
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+}
+
+.content:focus-visible {
+  outline: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--abba-space-2);
+  padding: var(--abba-space-2) var(--abba-space-3);
+  border-radius: var(--abba-radius-sm);
+  font-size: var(--abba-font-size-sm);
+  line-height: var(--abba-line-height-snug);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+/* Radix sets data-highlighted for both pointer and keyboard focus, so hover
+   and arrow-key navigation share one visual state. */
+.item[data-highlighted] {
+  background-color: var(--abba-primary-subtle);
+  color: var(--abba-primary-subtle-foreground);
+}
+
+.item[data-disabled] {
+  opacity: var(--abba-disabled-opacity);
+  cursor: not-allowed;
+}
+
+.danger[data-highlighted] {
+  background-color: var(--abba-danger-subtle);
+  color: var(--abba-danger-subtle-foreground);
+}
+
+.label {
+  padding: var(--abba-space-2) var(--abba-space-3) var(--abba-space-1);
+  color: var(--abba-muted-foreground);
+  font-size: var(--abba-font-size-xs);
+  font-weight: var(--abba-font-weight-semibold);
+  letter-spacing: var(--abba-letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.separator {
+  block-size: 1px;
+  margin: var(--abba-space-1) calc(var(--abba-space-1) * -1);
+  background-color: var(--abba-border-subtle);
+}
+
+.shortcut {
+  margin-inline-start: auto;
+  padding-inline-start: var(--abba-space-4);
+  color: var(--abba-muted-foreground);
+  font-size: var(--abba-font-size-xs);
+}
+
+@keyframes abba-menu-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}

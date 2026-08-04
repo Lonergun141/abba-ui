@@ -1,0 +1,28 @@
+.root {
+  font-family: var(--abba-font-mono);
+  font-size: 0.9em;
+}
+
+.inline {
+  padding: 0.15em 0.4em;
+  background-color: var(--abba-muted);
+  border-radius: var(--abba-radius-sm);
+  color: var(--abba-foreground);
+  overflow-wrap: break-word;
+}
+
+.block {
+  display: block;
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding: var(--abba-space-4);
+  background-color: var(--abba-background-subtle);
+  border: 1px solid var(--abba-border-subtle);
+  border-radius: var(--abba-radius-md);
+  color: var(--abba-foreground);
+  font-size: var(--abba-font-size-sm);
+  line-height: var(--abba-line-height-normal);
+  /* Long lines scroll inside the block rather than widening the page. */
+  overflow-x: auto;
+  white-space: pre;
+}
