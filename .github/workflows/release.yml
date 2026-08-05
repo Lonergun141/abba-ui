@@ -59,7 +59,32 @@ jobs:
           pnpm build
           pnpm test:package
 
+      - name: Check for npm credentials
+        id: npm
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -n "$NPM_TOKEN" ]; then
+            echo "has-token=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has-token=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "### Publish skipped"
+              echo
+              echo 'No `NPM_TOKEN` secret is set, so there are no credentials to publish with.'
+              echo 'Everything up to and including the packed-package verification ran and passed.'
+              echo
+              echo 'To enable publishing: create an npm automation token with publish rights to'
+              echo 'the `@abbainitiative` scope, then add it under **Settings → Secrets and'
+              echo 'variables → Actions** as `NPM_TOKEN`.'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # Skipped rather than failed when the secret is absent. Without this the
+      # job dies on an unauthenticated PUT, which the registry answers with a
+      # 404 for a scoped package — a misleading error for a missing token.
       - name: Create a release PR, or publish
+        if: steps.npm.outputs.has-token == 'true'
         uses: changesets/action@v1
         with:
           # With pending changesets this opens or updates a release PR. Once
