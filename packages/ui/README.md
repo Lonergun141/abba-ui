@@ -1,45 +1,33 @@
 # @abbainitiative/ui
 
-**ABBA UI** — the component library of the ABBA Design System.
+React components for Next.js and plain React. No Tailwind, no provider, no config.
 
-Accessible, themeable React components for Next.js App Router applications and plain React alike. No Tailwind required, no provider to mount, no build-step coupling.
-
-📖 **[ui.abbainitiative.ph](https://ui.abbainitiative.ph)** — full documentation with live examples.
+**[Live docs →](https://abba-ui.vercel.app)** · [GitHub](https://github.com/Lonergun141/abba-ui)
 
 ---
 
-## Installation
+## Install
 
 ```bash
 pnpm add @abbainitiative/ui
-# npm install @abbainitiative/ui
-# yarn add @abbainitiative/ui
-# bun add @abbainitiative/ui
 ```
 
-`react` and `react-dom` are peer dependencies (React 18.2 or 19).
+React 18.2 or 19 is a peer dependency.
 
-## Usage
+## Use it
 
-Import the stylesheet once, as high in the tree as you can:
+**1. Import the stylesheet once**, at the root of your app:
 
 ```tsx
-// app/layout.tsx
+// app/layout.tsx (Next.js) or src/main.tsx (Vite)
 import "@abbainitiative/ui/styles.css";
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
-}
 ```
 
-Then use components anywhere — including inside Server Components:
+Put it above your own stylesheets so your overrides win.
+
+**2. Use the components:**
 
 ```tsx
-// app/page.tsx — no "use client" needed
 import { Button, Card, CardBody, Heading, Stack } from "@abbainitiative/ui";
 
 export default function Page() {
@@ -56,87 +44,75 @@ export default function Page() {
 }
 ```
 
-## What makes it different
+No `transpilePackages`, no PostCSS plugin, no theme provider.
 
-### `"use client"` lives on the component, never the package root
+## What's in it
 
-Most component libraries put the directive at the top of their barrel file, which makes every component a Client Component — including a `Stack` that only sets `display: flex`. Here each component file carries its own directive, so a page importing `Heading` and `Stack` stays entirely on the server.
+|                |                                                                        |
+| -------------- | ---------------------------------------------------------------------- |
+| **Layout**     | `Box` `Stack` `Inline` `Container` `Grid` `Separator` `VisuallyHidden` |
+| **Typography** | `Text` `Heading` `Label` `Code` `Link`                                 |
+| **Buttons**    | `Button` `IconButton` `ButtonGroup`                                    |
+| **Forms**      | `Input` `Textarea` `FormField` `FormMessage`                           |
+| **Display**    | `Card` `Badge`                                                         |
+| **Feedback**   | `Alert` `Spinner`                                                      |
+| **Overlays**   | `Dialog` `DropdownMenu` `Tabs` `Toast`                                 |
+
+Every component also has its own entry point: `@abbainitiative/ui/badge`.
+
+## Quick examples
+
+```tsx
+<Button variant="danger" loading>Deleting</Button>
+<Button asChild><Link href="/signup">Sign up</Link></Button>
+<IconButton aria-label="Delete" icon={<TrashIcon />} />
+
+<FormField label="Email" error={error} required>
+  <Input type="email" />
+</FormField>
+
+<Alert tone="danger" title="Payment failed">Update your card details.</Alert>
+<Badge tone="success" dot>Active</Badge>
+```
+
+[Every component, with live examples →](https://abba-ui.vercel.app/docs/components)
+
+## Dark mode
+
+Set `data-theme="dark"` or the class `dark` on `<html>`. Both selectors ship, so `next-themes` works unchanged.
+
+## Theming
+
+Every colour, size and radius is a CSS variable. Override what you want, after the ABBA stylesheet:
+
+```css
+:root {
+  --abba-primary: #4338ca;
+  --abba-radius-md: 3px;
+  --abba-font-sans: var(--my-font), system-ui, sans-serif;
+}
+```
+
+No provider and no runtime, so it works inside Server Components too. [Token list →](https://abba-ui.vercel.app/docs/tokens)
+
+## Next.js
+
+`"use client"` is placed per component, never at the package root — so importing a `Stack` does not drag the whole library into your client bundle.
 
 **Server-renderable:** `Box` `Stack` `Inline` `Container` `Grid` `Separator` `VisuallyHidden` `Text` `Heading` `Label` `Code` `Link` `ButtonGroup` `FormMessage` `Card` `Badge` `Spinner`
 
 **Bring their own client boundary:** `Button` `IconButton` `Input` `Textarea` `FormField` `Alert` `Dialog` `DropdownMenu` `Tabs` `Toast`
 
-You can render either kind from a Server Component. The only restriction is the framework's: you cannot pass a function to a Client Component.
+You can render either kind from a Server Component — you just cannot pass a function to one. [Next.js guide →](https://abba-ui.vercel.app/docs/nextjs)
 
-### One stylesheet, built on CSS custom properties
+## Accessibility
 
-Styles compile to a single CSS file. There is no Tailwind requirement, no PostCSS plugin, and no content-scanning config to keep in sync with your source layout. Theming is a stylesheet change:
-
-```css
-:root {
-  --abba-primary: #4338ca;
-  --abba-primary-hover: #3730a3;
-  --abba-radius-md: 3px;
-}
-```
-
-Because it is only CSS, theming works unchanged inside Server Components.
-
-### Dark mode under both conventions
-
-The dark token set ships under `[data-theme="dark"]` **and** `.dark`, so it drops into either convention — including alongside `next-themes` or Tailwind's dark variant.
-
-### Tree-shakeable
-
-Per-component chunks with an explicit `exports` map, and `"sideEffects": ["**/*.css"]`. Import from the root or from a subpath:
-
-```tsx
-import { Badge } from "@abbainitiative/ui";
-import { Badge } from "@abbainitiative/ui/badge";
-```
-
-### Accessible by construction
-
-Focus management, ARIA relationships and keyboard interaction are part of each component. Every component has unit tests for its keyboard behaviour and an automated axe pass, both of which run in CI.
-
-Behaviour that is genuinely hard to implement correctly — focus trapping, roving tabindex, type-ahead, collision-aware positioning — is delegated to [Radix](https://www.radix-ui.com/primitives) primitives, used as an invisible behaviour layer. None of Radix's API surfaces in ABBA's props.
-
-## Components
-
-| Category     | Components                                                             |
-| ------------ | ---------------------------------------------------------------------- |
-| Layout       | `Box` `Stack` `Inline` `Container` `Grid` `Separator` `VisuallyHidden` |
-| Typography   | `Text` `Heading` `Label` `Code` `Link`                                 |
-| Actions      | `Button` `IconButton` `ButtonGroup`                                    |
-| Forms        | `Input` `Textarea` `FormField` `FormMessage`                           |
-| Data display | `Card` `Badge`                                                         |
-| Feedback     | `Alert` `Spinner`                                                      |
-| Overlays     | `Dialog` `DropdownMenu` `Tabs` `Toast`                                 |
+Keyboard interaction, focus management and ARIA relationships ship with each component and are tested, including an automated axe pass in CI. Focus trapping and menu navigation come from [Radix](https://www.radix-ui.com/primitives), used internally — none of its API is exposed.
 
 ## Requirements
 
 - React 18.2 or 19
-- A bundler that reads the `exports` field — Next.js, Vite, Rspack, Parcel, webpack 5
-- `"moduleResolution": "bundler"`, `"node16"` or `"nodenext"` in your `tsconfig.json`. The legacy `"node"` resolution ignores `exports` and cannot find the subpaths.
-
-Browser support is evergreen Chrome, Edge, Firefox and Safari. The stylesheet uses custom properties, logical properties and `color-mix()`.
-
-## Documentation
-
-- [Introduction](https://ui.abbainitiative.ph/docs)
-- [Installation](https://ui.abbainitiative.ph/docs/installation)
-- [Next.js guide](https://ui.abbainitiative.ph/docs/nextjs)
-- [Design tokens](https://ui.abbainitiative.ph/docs/tokens)
-- [Theming](https://ui.abbainitiative.ph/docs/theming)
-- [Dark mode](https://ui.abbainitiative.ph/docs/dark-mode)
-- [Accessibility](https://ui.abbainitiative.ph/docs/accessibility)
-
-## Versioning
-
-Semantic versioning. While the major version is `0`, minor releases may contain breaking changes, each documented in [CHANGELOG.md](./CHANGELOG.md).
-
-Class names are **not** part of the public API — they are content-hashed and change between builds. Token names **are**: removing or renaming one is a breaking change.
-
-## Licence
+- `"moduleResolution": "bundler"`, `node16` or `nodenext` in your `tsconfig.json`
+- Evergreen Chrome, Edge, Firefox, Safari
 
 MIT © ABBA Initiative

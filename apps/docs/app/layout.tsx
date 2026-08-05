@@ -10,10 +10,16 @@ import type * as React from "react";
 import { MobileNav } from "@/components/site/mobile-nav";
 import { ThemeScript } from "@/components/site/theme-script";
 import { ThemeToggle } from "@/components/site/theme-toggle";
-import { GITHUB_URL, NPM_URL, PACKAGE_NAME, PACKAGE_VERSION } from "@/content/site";
+import {
+  DOCS_URL,
+  GITHUB_URL,
+  NPM_URL,
+  PACKAGE_NAME,
+  PACKAGE_VERSION,
+} from "@/content/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ui.abbainitiative.ph"),
+  metadataBase: new URL(DOCS_URL),
   title: {
     default: "ABBA UI — ABBA Design System",
     template: "%s · ABBA UI",
@@ -24,7 +30,7 @@ export const metadata: Metadata = {
     title: "ABBA UI",
     description:
       "Accessible, themeable React components for React and Next.js App Router applications.",
-    url: "https://ui.abbainitiative.ph",
+    url: DOCS_URL,
     siteName: "ABBA UI",
     type: "website",
   },

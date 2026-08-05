@@ -226,7 +226,12 @@ Two steps require credentials that only the repository owner holds:
   Everything up to and including `npm pack` is verified locally and in CI; the
   release workflow is committed and publishes on the first push to `main` once
   the secret exists.
-- **Vercel project creation and `ui.abbainitiative.ph` DNS** — needs the Vercel
+- **`ui.abbainitiative.ph` DNS** — needs registrar access. The Vercel project
+  is created, connected to GitHub and deploying to
+  [abba-ui.vercel.app](https://abba-ui.vercel.app); only the custom domain is
+  outstanding, and `DOCS_URL` in `apps/docs/content/site.ts` is the one line to
+  change when it lands. Original wording follows.
+- ~~**Vercel project creation and `ui.abbainitiative.ph` DNS**~~ — needs the Vercel
   account. Build configuration, ignored-build-step, and workflows are committed;
   project linking is documented.
 
