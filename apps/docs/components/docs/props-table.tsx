@@ -1,7 +1,7 @@
 import { VisuallyHidden } from "@abbainitiative/ui";
 import type * as React from "react";
 
-import type { PropDef } from "@/content/types";
+import type { PropDef } from "@abbainitiative/registry";
 import styles from "./docs.module.css";
 
 /**

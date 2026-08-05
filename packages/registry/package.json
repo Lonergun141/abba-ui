@@ -1,0 +1,57 @@
+{
+  "name": "@abbainitiative/registry",
+  "version": "0.1.0",
+  "description": "Machine-readable catalogue of ABBA Design System components and design tokens.",
+  "keywords": [
+    "abba",
+    "design-system",
+    "component-registry",
+    "design-tokens"
+  ],
+  "license": "MIT",
+  "author": "ABBA Initiative",
+  "homepage": "https://abba-ui.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lonergun141/abba-ui.git",
+    "directory": "packages/registry"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "lint": "eslint .",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rimraf dist .turbo *.tgz"
+  },
+  "devDependencies": {
+    "@abbainitiative/eslint-config": "workspace:*",
+    "@abbainitiative/typescript-config": "workspace:*",
+    "@types/node": "^26.1.2",
+    "eslint": "10.8.0",
+    "rimraf": "6.0.1",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

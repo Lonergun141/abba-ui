@@ -1,14 +1,11 @@
+import { getTokenGroup, type TokenDef } from "@abbainitiative/registry";
 import type { Metadata } from "next";
 import Link from "next/link";
 import type * as React from "react";
 
 import { CodeBlock } from "@/components/docs/code-block";
 import { PageNav } from "@/components/docs/page-nav";
-import {
-  ScalePreview,
-  TokenPreview,
-  type TokenEntry,
-} from "@/components/docs/token-preview";
+import { ScalePreview, TokenPreview } from "@/components/docs/token-preview";
 
 export const metadata: Metadata = {
   title: "Design tokens",
@@ -16,143 +13,19 @@ export const metadata: Metadata = {
     "The full ABBA Design System token reference: Cedar and Ember palettes, semantic roles, spacing, type, radii, elevation and motion.",
 };
 
-const CEDAR: TokenEntry[] = [
-  { name: "--abba-cedar-50", value: "#edf6f3" },
-  { name: "--abba-cedar-100", value: "#d2e9e2" },
-  { name: "--abba-cedar-200", value: "#a6d3c7" },
-  { name: "--abba-cedar-300", value: "#74b8a8" },
-  { name: "--abba-cedar-400", value: "#45988a" },
-  { name: "--abba-cedar-500", value: "#2a7c6e" },
-  { name: "--abba-cedar-600", value: "#1f6b60" },
-  { name: "--abba-cedar-700", value: "#175449" },
-  { name: "--abba-cedar-800", value: "#123f38" },
-  { name: "--abba-cedar-900", value: "#0d2c27" },
-  { name: "--abba-cedar-950", value: "#071a17" },
-];
-
-const EMBER: TokenEntry[] = [
-  { name: "--abba-ember-50", value: "#fdf3ea" },
-  { name: "--abba-ember-100", value: "#f9e0c9" },
-  { name: "--abba-ember-200", value: "#f0c094" },
-  { name: "--abba-ember-300", value: "#e39d5f" },
-  { name: "--abba-ember-400", value: "#d27e33" },
-  { name: "--abba-ember-500", value: "#a85714" },
-  { name: "--abba-ember-600", value: "#984e13" },
-  { name: "--abba-ember-700", value: "#7a3d10" },
-  { name: "--abba-ember-800", value: "#5c2e0d" },
-  { name: "--abba-ember-900", value: "#3f200a" },
-];
-
-const NEUTRALS: TokenEntry[] = [
-  { name: "--abba-neutral-0", value: "#ffffff" },
-  { name: "--abba-neutral-25", value: "#fcfbf9" },
-  { name: "--abba-neutral-50", value: "#faf9f7" },
-  { name: "--abba-neutral-100", value: "#f4f2ee" },
-  { name: "--abba-neutral-200", value: "#e8e4dd" },
-  { name: "--abba-neutral-300", value: "#d6d0c6" },
-  { name: "--abba-neutral-400", value: "#b0a89c" },
-  { name: "--abba-neutral-500", value: "#857c71" },
-  { name: "--abba-neutral-600", value: "#635b52" },
-  { name: "--abba-neutral-700", value: "#47413a" },
-  { name: "--abba-neutral-800", value: "#2e2925" },
-  { name: "--abba-neutral-900", value: "#1c1815" },
-  { name: "--abba-neutral-950", value: "#12100e" },
-];
-
-const SEMANTIC: TokenEntry[] = [
-  { name: "--abba-primary", value: "cedar 600" },
-  { name: "--abba-primary-hover", value: "cedar 700" },
-  { name: "--abba-primary-active", value: "cedar 800" },
-  { name: "--abba-primary-foreground", value: "neutral 0" },
-  { name: "--abba-primary-subtle", value: "cedar 50" },
-  { name: "--abba-primary-subtle-foreground", value: "cedar 800" },
-  { name: "--abba-accent", value: "ember 500" },
-  { name: "--abba-accent-hover", value: "ember 600" },
-  { name: "--abba-accent-active", value: "ember 700" },
-  { name: "--abba-accent-foreground", value: "neutral 0" },
-  { name: "--abba-accent-subtle", value: "ember 50" },
-  { name: "--abba-accent-subtle-foreground", value: "ember 800" },
-];
-
-const STATES: TokenEntry[] = [
-  { name: "--abba-success", value: "#1f7a4d" },
-  { name: "--abba-success-subtle", value: "#e8f5ee" },
-  { name: "--abba-warning", value: "#b7791f" },
-  { name: "--abba-warning-subtle", value: "#fcf3e3" },
-  { name: "--abba-danger", value: "#b42318" },
-  { name: "--abba-danger-subtle", value: "#fdecea" },
-  { name: "--abba-info", value: "#2c6ba8" },
-  { name: "--abba-info-subtle", value: "#e9f1f9" },
-];
-
-const SURFACES: TokenEntry[] = [
-  { name: "--abba-background", value: "page background" },
-  { name: "--abba-background-subtle", value: "recessed areas" },
-  { name: "--abba-background-raised", value: "cards, menus, dialogs" },
-  { name: "--abba-foreground", value: "body text" },
-  { name: "--abba-muted", value: "hover fills" },
-  { name: "--abba-muted-foreground", value: "secondary text" },
-  { name: "--abba-border", value: "default border" },
-  { name: "--abba-border-subtle", value: "hairlines" },
-  { name: "--abba-border-strong", value: "emphasised border" },
-  { name: "--abba-overlay", value: "dialog scrim" },
-];
-
-const SPACING: TokenEntry[] = [
-  { name: "--abba-space-1", value: "0.25rem" },
-  { name: "--abba-space-2", value: "0.5rem" },
-  { name: "--abba-space-3", value: "0.75rem" },
-  { name: "--abba-space-4", value: "1rem" },
-  { name: "--abba-space-5", value: "1.25rem" },
-  { name: "--abba-space-6", value: "1.5rem" },
-  { name: "--abba-space-8", value: "2rem" },
-  { name: "--abba-space-10", value: "2.5rem" },
-  { name: "--abba-space-12", value: "3rem" },
-  { name: "--abba-space-16", value: "4rem" },
-  { name: "--abba-space-20", value: "5rem" },
-  { name: "--abba-space-24", value: "6rem" },
-];
-
-const RADII: TokenEntry[] = [
-  { name: "--abba-radius-none", value: "0" },
-  { name: "--abba-radius-sm", value: "6px" },
-  { name: "--abba-radius-md", value: "10px" },
-  { name: "--abba-radius-lg", value: "14px" },
-  { name: "--abba-radius-xl", value: "20px" },
-  { name: "--abba-radius-full", value: "9999px" },
-];
-
-const TYPE_SIZES: [string, string, string][] = [
-  ["--abba-font-size-xs", "0.75rem", "Captions, shortcut hints"],
-  ["--abba-font-size-sm", "0.875rem", "Secondary text, dense UI"],
-  ["--abba-font-size-md", "1rem", "Body copy — the default"],
-  ["--abba-font-size-lg", "1.125rem", "Lead paragraphs"],
-  ["--abba-font-size-xl", "1.375rem", "Section headings"],
-  ["--abba-font-size-2xl", "1.75rem", "Page headings"],
-  ["--abba-font-size-3xl", "2.25rem", "Page titles"],
-  ["--abba-font-size-4xl", "3rem", "Display"],
-];
-
-const MOTION: [string, string, string][] = [
-  ["--abba-duration-instant", "80ms", "State flips with no perceived travel"],
-  ["--abba-duration-fast", "140ms", "Hover, focus, small colour changes"],
-  ["--abba-duration-normal", "220ms", "Menus, popovers"],
-  ["--abba-duration-slow", "320ms", "Dialogs and larger surfaces"],
-  ["--abba-ease-standard", "cubic-bezier(0.2, 0, 0, 1)", "Default curve"],
-  ["--abba-ease-out", "cubic-bezier(0, 0, 0.2, 1)", "Entering the screen"],
-  ["--abba-ease-in", "cubic-bezier(0.4, 0, 1, 1)", "Leaving the screen"],
-];
-
-const Z_INDEX: [string, string][] = [
-  ["--abba-z-base", "0"],
-  ["--abba-z-raised", "10"],
-  ["--abba-z-sticky", "100"],
-  ["--abba-z-overlay", "1000"],
-  ["--abba-z-modal", "1100"],
-  ["--abba-z-popover", "1200"],
-  ["--abba-z-toast", "1300"],
-  ["--abba-z-tooltip", "1400"],
-];
+/**
+ * Token data comes from @abbainitiative/registry, which is also what the MCP
+ * server serves. This page had its own copy of every value; two hand-kept lists
+ * of the same tokens is the arrangement that drifts, and the registry's tests
+ * check it against tokens.css directly.
+ */
+function group(id: string): TokenDef[] {
+  const found = getTokenGroup(id);
+  // Throwing beats an empty section: a renamed group should fail the build,
+  // not quietly render a heading with nothing under it.
+  if (!found) throw new Error(`Unknown token group: ${id}`);
+  return found.tokens;
+}
 
 const USING_TOKENS = `/* Tokens are ordinary CSS custom properties, so your own
    styles can consume them directly. */
@@ -192,7 +65,7 @@ export default function TokensPage(): React.JSX.Element {
         default primary and reaches 6.3:1 against white text, comfortably clearing WCAG
         AA.
       </p>
-      <TokenPreview tokens={CEDAR} />
+      <TokenPreview tokens={group("palette-cedar")} />
 
       <h2>Palette — Ember</h2>
       <p>
@@ -201,7 +74,7 @@ export default function TokensPage(): React.JSX.Element {
         instead of stalling at 4.4:1 — a mid-tone orange that <em>looks</em> right
         almost never passes.
       </p>
-      <TokenPreview tokens={EMBER} />
+      <TokenPreview tokens={group("palette-ember")} />
 
       <h2>Palette — Neutrals</h2>
       <p>
@@ -209,14 +82,14 @@ export default function TokensPage(): React.JSX.Element {
         choice: it is the single most effective defence against a system reading as
         generic template output.
       </p>
-      <TokenPreview tokens={NEUTRALS} />
+      <TokenPreview tokens={group("palette-neutral")} />
 
       <h2>Semantic roles</h2>
       <p>
         These are the tokens components actually consume, and the ones to override when
         rebranding.
       </p>
-      <TokenPreview tokens={SEMANTIC} />
+      <TokenPreview tokens={group("semantic")} />
 
       <h3>State colours</h3>
       <p>
@@ -225,10 +98,10 @@ export default function TokensPage(): React.JSX.Element {
         cannot reach AA without pushing the hue muddy, so the system takes the dark
         foreground instead of a worse colour.
       </p>
-      <TokenPreview tokens={STATES} />
+      <TokenPreview tokens={group("state")} />
 
       <h3>Surfaces and borders</h3>
-      <TokenPreview tokens={SURFACES} />
+      <TokenPreview tokens={group("surface")} />
 
       <h2>Spacing</h2>
       <p>
@@ -236,10 +109,10 @@ export default function TokensPage(): React.JSX.Element {
         <code>gap=&#123;4&#125;</code> resolves to <code>var(--abba-space-4)</code> — so
         spacing stays on the scale without you writing the variable out.
       </p>
-      <ScalePreview tokens={SPACING} property="width" />
+      <ScalePreview tokens={group("space")} property="width" />
 
       <h2>Radii</h2>
-      <ScalePreview tokens={RADII} property="radius" />
+      <ScalePreview tokens={group("radius")} property="radius" />
 
       <h2>Typography</h2>
       <p>
@@ -258,13 +131,13 @@ export default function TokensPage(): React.JSX.Element {
             </tr>
           </thead>
           <tbody>
-            {TYPE_SIZES.map(([name, value, use]) => (
+            {group("typography").map(({ name, value, description }) => (
               <tr key={name}>
                 <th scope="row">
                   <code>{name}</code>
                 </th>
                 <td>{value}</td>
-                <td>{use}</td>
+                <td>{description}</td>
               </tr>
             ))}
           </tbody>
@@ -315,7 +188,7 @@ export default function TokensPage(): React.JSX.Element {
             </tr>
           </thead>
           <tbody>
-            {MOTION.map(([name, value, use]) => (
+            {group("motion").map(({ name, value, description }) => (
               <tr key={name}>
                 <th scope="row">
                   <code>{name}</code>
@@ -323,7 +196,7 @@ export default function TokensPage(): React.JSX.Element {
                 <td>
                   <code>{value}</code>
                 </td>
-                <td>{use}</td>
+                <td>{description}</td>
               </tr>
             ))}
           </tbody>
@@ -350,7 +223,7 @@ export default function TokensPage(): React.JSX.Element {
             </tr>
           </thead>
           <tbody>
-            {Z_INDEX.map(([name, value]) => (
+            {group("z-index").map(({ name, value }) => (
               <tr key={name}>
                 <th scope="row">
                   <code>{name}</code>

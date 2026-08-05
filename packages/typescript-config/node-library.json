@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "ABBA Node Library",
+  "extends": "./base.json",
+  "compilerOptions": {
+    /**
+     * For packages whose output Node executes directly, with no bundler in
+     * between.
+     *
+     * The base config uses `moduleResolution: "bundler"`, which permits
+     * extensionless relative imports because a bundler will resolve them. tsc
+     * emits those imports unchanged, and Node's ESM loader rejects them —
+     * producing a package that builds, type-checks and passes a Vitest suite,
+     * then fails with ERR_MODULE_NOT_FOUND the first time anyone runs it.
+     *
+     * `nodenext` makes TypeScript apply Node's own rules, so a missing `.js`
+     * extension is a compile error rather than a runtime one.
+     */
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
+  }
+}

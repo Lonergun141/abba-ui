@@ -1,0 +1,8 @@
+{
+  "extends": "@abbainitiative/typescript-config/node-library.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": ["src", "vitest.config.ts"],
+  "exclude": ["dist", "node_modules"]
+}

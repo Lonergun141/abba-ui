@@ -1,4 +1,4 @@
-import type { ComponentDoc } from "../types";
+import type { ComponentDoc } from "../types.js";
 
 /** Data display, feedback and overlay components. */
 export const surfaceComponents: ComponentDoc[] = [

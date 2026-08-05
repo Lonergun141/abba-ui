@@ -1,4 +1,4 @@
-import { componentsByCategory } from "./registry";
+import { componentsByCategory } from "@abbainitiative/registry";
 
 export interface NavItem {
   title: string;
@@ -20,6 +20,7 @@ const guideSections: NavSection[] = [
       { title: "Installation", href: "/docs/installation" },
       { title: "Next.js", href: "/docs/nextjs" },
       { title: "React", href: "/docs/react" },
+      { title: "MCP", href: "/docs/mcp" },
     ],
   },
   {

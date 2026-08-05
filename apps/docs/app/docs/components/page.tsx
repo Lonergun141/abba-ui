@@ -5,7 +5,7 @@ import type * as React from "react";
 
 import docs from "@/components/docs/docs.module.css";
 import { PageNav } from "@/components/docs/page-nav";
-import { components, componentsByCategory } from "@/content/registry";
+import { components, componentsByCategory } from "@abbainitiative/registry";
 
 export const metadata: Metadata = {
   title: "Components",

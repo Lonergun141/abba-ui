@@ -10,7 +10,7 @@ import { ComponentPreview } from "@/components/docs/component-preview";
 import docs from "@/components/docs/docs.module.css";
 import { PageNav } from "@/components/docs/page-nav";
 import { PropsTable } from "@/components/docs/props-table";
-import { components, getComponent } from "@/content/registry";
+import { components, getComponent } from "@abbainitiative/registry";
 import { PACKAGE_NAME } from "@/content/site";
 
 /**
