@@ -1,0 +1,12 @@
+{
+  "extends": "@abbainitiative/typescript-config/nextjs.json",
+  "compilerOptions": {
+    // No `baseUrl`: it is deprecated in TypeScript 6 and removed in 7. Path
+    // mappings resolve relative to this file, which is what we want anyway.
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", ".next"]
+}

@@ -7,8 +7,10 @@ import styles from "./input.module.css";
 
 export type InputSize = "sm" | "md" | "lg";
 
-export interface InputProps
-  extends Omit<React.ComponentPropsWithoutRef<"input">, "size" | "prefix"> {
+export interface InputProps extends Omit<
+  React.ComponentPropsWithoutRef<"input">,
+  "size" | "prefix"
+> {
   /** Control height. Defaults to `md`. Renamed from the native `size` attribute. */
   size?: InputSize;
   /** Marks the field as failing validation. */
@@ -29,15 +31,7 @@ export interface InputProps
  * component never holds the value itself.
  */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
-  {
-    size = "md",
-    invalid = false,
-    prefix,
-    suffix,
-    className,
-    type = "text",
-    ...rest
-  },
+  { size = "md", invalid = false, prefix, suffix, className, type = "text", ...rest },
   ref,
 ) {
   const field = (

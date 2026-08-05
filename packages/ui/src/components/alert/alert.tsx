@@ -7,8 +7,10 @@ import styles from "./alert.module.css";
 
 export type AlertTone = "info" | "success" | "warning" | "danger";
 
-export interface AlertProps
-  extends Omit<React.ComponentPropsWithoutRef<"div">, "title"> {
+export interface AlertProps extends Omit<
+  React.ComponentPropsWithoutRef<"div">,
+  "title"
+> {
   /** Semantic role of the message. Defaults to `info`. */
   tone?: AlertTone;
   /**
@@ -29,7 +31,9 @@ export interface AlertProps
 const ICON_PATHS: Record<AlertTone, React.ReactNode> = {
   info: <path d="M12 16v-5M12 8.2v.2M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z" />,
   success: <path d="m8 12.5 2.8 2.8L16 9.4M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z" />,
-  warning: <path d="M12 9.5v4M12 17.3v.2M10.3 4l-7.6 13a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3l-7.6-13a2 2 0 0 0-3.4 0Z" />,
+  warning: (
+    <path d="M12 9.5v4M12 17.3v.2M10.3 4l-7.6 13a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3l-7.6-13a2 2 0 0 0-3.4 0Z" />
+  ),
   danger: <path d="M12 8v5M12 16.3v.2M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z" />,
 };
 

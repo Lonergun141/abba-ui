@@ -1,0 +1,74 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  # Never two releases at once: a second run could publish a version the first
+  # has already claimed.
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  TURBO_UI: false
+
+jobs:
+  release:
+    name: Version or publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    permissions:
+      contents: write # create the release PR and its version commit
+      pull-requests: write # open and update the release PR
+      id-token: write # npm provenance attestation
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          # Points npm at the public registry and wires NODE_AUTH_TOKEN, which
+          # `changeset publish` reads. The token itself comes from the secret
+          # below and is never written to the repository.
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and verify
+        # Publishing an unverified artefact is how a broken release happens.
+        # This is the same gate CI runs, repeated here because a release can be
+        # triggered by a merge whose CI run predates the version bump.
+        run: |
+          pnpm lint
+          pnpm typecheck
+          pnpm test
+          pnpm build
+          pnpm test:package
+
+      - name: Create a release PR, or publish
+        uses: changesets/action@v1
+        with:
+          # With pending changesets this opens or updates a release PR. Once
+          # that PR is merged there are none left, so this same step publishes.
+          version: pnpm run version-packages
+          publish: pnpm run release
+          commit: "chore: version packages"
+          title: "chore: version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true

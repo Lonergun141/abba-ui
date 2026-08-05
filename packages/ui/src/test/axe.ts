@@ -22,7 +22,10 @@ export async function toHaveNoAxeViolations(
   });
 
   if (results.violations.length === 0) {
-    return { pass: true, message: () => "expected accessibility violations, found none" };
+    return {
+      pass: true,
+      message: () => "expected accessibility violations, found none",
+    };
   }
 
   const detail = results.violations

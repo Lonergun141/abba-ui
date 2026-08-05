@@ -63,8 +63,9 @@ export const DropdownMenuContent = React.forwardRef<
 
 DropdownMenuContent.displayName = "DropdownMenuContent";
 
-export interface DropdownMenuItemProps
-  extends React.ComponentPropsWithoutRef<typeof RadixMenu.Item> {
+export interface DropdownMenuItemProps extends React.ComponentPropsWithoutRef<
+  typeof RadixMenu.Item
+> {
   /** Styles the item as a destructive action. */
   tone?: "default" | "danger";
 }
@@ -93,7 +94,9 @@ export const DropdownMenuLabel = React.forwardRef<
   HTMLDivElement,
   DropdownMenuLabelProps
 >(function DropdownMenuLabel({ className, ...rest }, ref) {
-  return <RadixMenu.Label ref={ref} className={cn(styles.label, className)} {...rest} />;
+  return (
+    <RadixMenu.Label ref={ref} className={cn(styles.label, className)} {...rest} />
+  );
 });
 
 DropdownMenuLabel.displayName = "DropdownMenuLabel";
@@ -108,7 +111,11 @@ export const DropdownMenuSeparator = React.forwardRef<
   DropdownMenuSeparatorProps
 >(function DropdownMenuSeparator({ className, ...rest }, ref) {
   return (
-    <RadixMenu.Separator ref={ref} className={cn(styles.separator, className)} {...rest} />
+    <RadixMenu.Separator
+      ref={ref}
+      className={cn(styles.separator, className)}
+      {...rest}
+    />
   );
 });
 
@@ -127,7 +134,12 @@ export const DropdownMenuShortcut = React.forwardRef<
   DropdownMenuShortcutProps
 >(function DropdownMenuShortcut({ className, ...rest }, ref) {
   return (
-    <span ref={ref} aria-hidden="true" className={cn(styles.shortcut, className)} {...rest} />
+    <span
+      ref={ref}
+      aria-hidden="true"
+      className={cn(styles.shortcut, className)}
+      {...rest}
+    />
   );
 });
 

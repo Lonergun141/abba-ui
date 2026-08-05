@@ -6,13 +6,7 @@ import styles from "./text.module.css";
 export type TextSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type TextWeight = "regular" | "medium" | "semibold" | "bold";
 export type TextTone =
-  | "default"
-  | "muted"
-  | "primary"
-  | "accent"
-  | "success"
-  | "warning"
-  | "danger";
+  "default" | "muted" | "primary" | "accent" | "success" | "warning" | "danger";
 export type TextLeading = "tight" | "snug" | "normal" | "relaxed";
 
 export interface TextProps extends React.ComponentPropsWithoutRef<"p"> {

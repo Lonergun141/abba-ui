@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  # A new push to the same branch supersedes the run in progress. Pushes to main
+  # are exempt: those runs gate the release, so they finish.
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+env:
+  # Turborepo prints progress rather than a live-updating TUI, which is
+  # unreadable in Actions logs.
+  TURBO_UI: false
+
+jobs:
+  verify:
+    name: Lint, typecheck, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          # Changesets needs history to work out what has already been released.
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Node
+        uses: actions/setup-node@v6
+        with:
+          # Read from .nvmrc so the toolchain version lives in one place.
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check formatting
+        run: pnpm format:check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Verify the published package
+        # Packs the tarball and inspects what a consumer actually receives:
+        # the export map, the "use client" placement, and the file list.
+        run: pnpm test:package
+
+      - name: Upload the docs build
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-build-log
+          path: apps/docs/.next/trace
+          if-no-files-found: ignore
+          retention-days: 3

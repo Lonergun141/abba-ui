@@ -7,8 +7,10 @@ import { FormMessage } from "../form-message/form-message";
 import { Label } from "../label/label";
 import styles from "./form-field.module.css";
 
-export interface FormFieldProps
-  extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {
+export interface FormFieldProps extends Omit<
+  React.ComponentPropsWithoutRef<"div">,
+  "children"
+> {
   /** Visible caption for the control. */
   label?: React.ReactNode;
   /** Helper text describing the expected input. */
@@ -97,7 +99,7 @@ export const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
 
         {clonedControl}
 
-        {description ?? error ? (
+        {(description ?? error) ? (
           <div className={styles.messages}>
             {description ? (
               <FormMessage id={descriptionId} tone="description">

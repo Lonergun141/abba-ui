@@ -28,17 +28,17 @@ pnpm workspaces + Turborepo, with `apps/docs`, `packages/ui`,
 
 Versions were resolved from the npm registry at design time, not assumed.
 
-| Tool | Version | Note |
-| --- | --- | --- |
-| Next.js | 16.3.0 | docs + example app |
-| React | 19.2.8 | peer range allows >= 18.2 |
-| Vite | 8.2.0 | library build |
-| **TypeScript** | **6.0.3** | see below |
-| Vitest | 4.1.10 | unit + a11y |
-| Playwright | 1.62.1 | E2E against docs |
-| Turborepo | 2.10.8 | task orchestration |
-| ESLint | 10.8.0 | flat config |
-| Radix UI | 1.x / 2.x | behavior layer only |
+| Tool           | Version   | Note                      |
+| -------------- | --------- | ------------------------- |
+| Next.js        | 16.3.0    | docs + example app        |
+| React          | 19.2.8    | peer range allows >= 18.2 |
+| Vite           | 8.2.0     | library build             |
+| **TypeScript** | **6.0.3** | see below                 |
+| Vitest         | 4.1.10    | unit + a11y               |
+| Playwright     | 1.62.1    | E2E against docs          |
+| Turborepo      | 2.10.8    | task orchestration        |
+| ESLint         | 10.8.0    | flat config               |
+| Radix UI       | 1.x / 2.x | behavior layer only       |
 
 ### 3.1 Why TypeScript 6.0.3 and not 7.0.2
 
@@ -113,12 +113,12 @@ duplicate React context and break those boundaries.
 
 `"use client"` is never placed at the package root.
 
-| Server-renderable (no directive) | Client (`"use client"`) |
-| --- | --- |
-| Box, Stack, Inline, Container, Grid | Button, IconButton |
-| Separator, VisuallyHidden | Input, Textarea, FormField, FormMessage |
-| Text, Heading, Label, Code, Link | Dialog, DropdownMenu, Tabs, Toast |
-| Card, Badge, Spinner, ButtonGroup | Alert (only when dismissible) |
+| Server-renderable (no directive)    | Client (`"use client"`)                 |
+| ----------------------------------- | --------------------------------------- |
+| Box, Stack, Inline, Container, Grid | Button, IconButton                      |
+| Separator, VisuallyHidden           | Input, Textarea, FormField, FormMessage |
+| Text, Heading, Label, Code, Link    | Dialog, DropdownMenu, Tabs, Toast       |
+| Card, Badge, Spinner, ButtonGroup   | Alert (only when dismissible)           |
 
 The example app proves this by rendering the left column from a Server Component
 file containing no `"use client"` directive.
@@ -135,11 +135,13 @@ Deep cedar teal primary, warm ember accent, over a warm-tinted neutral ramp
 defence against a system reading as templated.
 
 ```css
---abba-primary: #1F6B60;        /* 5.8:1 against white text */
+--abba-primary: #1f6b60; /* 5.8:1 against white text */
 --abba-primary-hover: #155349;
---abba-accent: #B7621A;
---abba-success: #1F7A4D;  --abba-warning: #B7791F;
---abba-danger:  #B42318;  --abba-info:    #2C6BA8;
+--abba-accent: #b7621a;
+--abba-success: #1f7a4d;
+--abba-warning: #b7791f;
+--abba-danger: #b42318;
+--abba-info: #2c6ba8;
 --abba-radius-md: 10px;
 ```
 
@@ -184,30 +186,55 @@ tests, and a documentation page.
   fifteen lines beats inheriting an abandoned one.
 - **Export contract** — a test asserts every component directory has a matching
   `exports` entry in `package.json`, so a missing export fails the build.
-- **E2E** — Playwright against the docs site: navigation, theme switch, mobile
-  nav, copy-code, Dialog, DropdownMenu, Toast, plus assertions of zero console
-  errors and zero hydration errors.
-- **Package** — `pnpm test:package` builds, runs `npm pack`, installs the `.tgz`
-  into a **clean temporary copy** of the example app (never the workspace-linked
-  one, rewriting the `workspace:*` protocol out of the copied manifest), runs
-  `next build`, and asserts a single React instance, emitted CSS, and resolving
-  types.
+- **E2E** — ~~Playwright against the docs site~~. **Cut on request** (see §8.1).
+- **Package** — `pnpm test:package` builds, runs `npm pack`, extracts the `.tgz`
+  into a throwaway `node_modules`, and asserts the tarball's file list, every
+  `exports` subpath (resolved by Node in a child process rooted at a synthetic
+  consumer), the declared `types` paths, the `"use client"` placement of every
+  component, and the manifest's peer dependencies and `sideEffects`. Runs
+  offline: resolution is checked with `import.meta.resolve` rather than by
+  installing and importing, so no registry is involved.
 
 ## 8. Out of scope for this build
 
+### 8.1 Cut mid-build, on request
+
+Three items from the original brief were removed by the repository owner once the
+component set was in place. They are recorded here so their absence reads as a
+decision rather than an omission.
+
+- **Playwright E2E suite.** Cut. The interaction behaviour it would have covered
+  (Dialog focus trapping, DropdownMenu arrow keys, Toast) is covered by the unit
+  suite through Testing Library and `user-event`; what is genuinely lost is
+  real-browser verification of hydration and console cleanliness.
+- **`examples/nextjs-app`.** Cut. `apps/docs` fills the same role: it is a real
+  Next.js App Router application that consumes the compiled `dist` with no
+  `transpilePackages`, so a broken artefact fails its build.
+- **Component set stopped at DropdownMenu.** The brief listed roughly forty
+  components; the owner called a halt after twenty-seven to move on to the
+  documentation site. Tooltip, Select, Checkbox, Radio, Switch, Accordion,
+  Popover, Avatar, Skeleton, Table, Breadcrumb and Pagination are unbuilt.
+
+The packed-tarball test survived the cut in a rewritten form: it no longer
+installs into the example app, and instead verifies the tarball directly (§7).
+
+### 8.2 Requires credentials the build cannot hold
+
 Two steps require credentials that only the repository owner holds:
 
-- **`npm publish`** — needs npm login and an OTP. Everything up to and including
-  `npm pack --dry-run` is verified; the publish command is documented.
+- **`npm publish`** — needs an `NPM_TOKEN` in the repository's Actions secrets.
+  Everything up to and including `npm pack` is verified locally and in CI; the
+  release workflow is committed and publishes on the first push to `main` once
+  the secret exists.
 - **Vercel project creation and `ui.abbainitiative.ph` DNS** — needs the Vercel
   account. Build configuration, ignored-build-step, and workflows are committed;
   project linking is documented.
 
 ## 9. Risks
 
-| Risk | Mitigation |
-| --- | --- |
+| Risk                                                              | Mitigation                                                                                          |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | Vite `preserveModules` + CSS extraction interaction is unverified | Verified against a real build before components are written; fallback is a dedicated CSS build step |
-| TypeScript 6 → 7 migration pressure | Pinned with a documented upgrade trigger |
-| Radix major-version churn | Externalised and range-pinned; behavior layer is swappable because the public API is ours |
-| Windows path handling in the package test script | Script uses `node:path` throughout and is exercised in CI on ubuntu |
+| TypeScript 6 → 7 migration pressure                               | Pinned with a documented upgrade trigger                                                            |
+| Radix major-version churn                                         | Externalised and range-pinned; behavior layer is swappable because the public API is ours           |
+| Windows path handling in the package test script                  | Script uses `node:path` throughout and is exercised in CI on ubuntu                                 |

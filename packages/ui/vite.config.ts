@@ -1,3 +1,4 @@
+import { readdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 import react from "@vitejs/plugin-react";
@@ -43,6 +44,35 @@ function preserveUseClient(): Plugin {
   };
 }
 
+/**
+ * Every component directory is its own entry point.
+ *
+ * The package advertises `@abbainitiative/ui/button` and 26 sibling subpaths in
+ * its `exports` map. With only `src/index.ts` as an entry, Rollup treats each
+ * component's barrel as an internal re-export and elides it — so those
+ * advertised subpaths resolve to files that were never emitted. That break is
+ * invisible to the test suite and to the docs site, which both import from the
+ * root barrel; it only surfaces once the package is packed and installed, which
+ * is what `pnpm test:package` does.
+ *
+ * Read from the filesystem rather than listed by hand so a new component cannot
+ * be added with a subpath that silently fails to build.
+ */
+const componentsDir = resolve(import.meta.dirname, "src/components");
+
+const entries: Record<string, string> = {
+  index: resolve(import.meta.dirname, "src/index.ts"),
+};
+
+for (const dirent of readdirSync(componentsDir, { withFileTypes: true })) {
+  if (!dirent.isDirectory()) continue;
+  entries[`components/${dirent.name}/index`] = resolve(
+    componentsDir,
+    dirent.name,
+    "index.ts",
+  );
+}
+
 export default defineConfig({
   plugins: [react(), preserveUseClient()],
   build: {
@@ -54,7 +84,7 @@ export default defineConfig({
     minify: false,
     cssCodeSplit: false,
     lib: {
-      entry: resolve(import.meta.dirname, "src/index.ts"),
+      entry: entries,
       formats: ["es"],
       cssFileName: "styles",
     },

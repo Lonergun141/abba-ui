@@ -3,8 +3,7 @@ import * as React from "react";
 import { Flex, type FlexOwnProps } from "../../internal/flex";
 
 export interface InlineProps
-  extends FlexOwnProps,
-    React.ComponentPropsWithoutRef<"div"> {}
+  extends FlexOwnProps, React.ComponentPropsWithoutRef<"div"> {}
 
 /**
  * Arranges children horizontally with token-based spacing.

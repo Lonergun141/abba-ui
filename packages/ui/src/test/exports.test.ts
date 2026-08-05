@@ -56,9 +56,10 @@ describe("package exports contract", () => {
     const dangling = componentExportKeys.filter(
       (key) => !componentDirectories.includes(key),
     );
-    expect(dangling, `exports entries with no component: ${dangling.join(", ")}`).toEqual(
-      [],
-    );
+    expect(
+      dangling,
+      `exports entries with no component: ${dangling.join(", ")}`,
+    ).toEqual([]);
   });
 
   it("always exports the root entry and the stylesheet", () => {

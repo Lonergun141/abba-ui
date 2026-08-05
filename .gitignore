@@ -7,13 +7,8 @@ out/
 coverage/
 *.tsbuildinfo
 
-# Test + build artefacts
-playwright-report/
-test-results/
-blob-report/
-.playwright/
+# Packed tarballs from `pnpm test:package`
 *.tgz
-.package-test/
 
 # Environment
 .env

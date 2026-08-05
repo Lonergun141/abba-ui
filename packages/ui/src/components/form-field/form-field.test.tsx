@@ -128,7 +128,12 @@ describe("FormField", () => {
 
   it("has no axe violations, including in the error state", async () => {
     const { container } = render(
-      <FormField label="Email" description="Work address" error="Already taken" required>
+      <FormField
+        label="Email"
+        description="Work address"
+        error="Already taken"
+        required
+      >
         <Input />
       </FormField>,
     );

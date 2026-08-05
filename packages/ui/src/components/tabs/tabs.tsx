@@ -17,8 +17,9 @@ export type TabsVariant = "line" | "enclosed";
 
 const TabsVariantContext = React.createContext<TabsVariant>("line");
 
-export interface TabsProps
-  extends React.ComponentPropsWithoutRef<typeof RadixTabs.Root> {
+export interface TabsProps extends React.ComponentPropsWithoutRef<
+  typeof RadixTabs.Root
+> {
   /** Visual treatment of the tab list. Defaults to `line`. */
   variant?: TabsVariant;
 }
@@ -69,7 +70,11 @@ export type TabsTriggerProps = React.ComponentPropsWithoutRef<typeof RadixTabs.T
 export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
   function TabsTrigger({ className, ...rest }, ref) {
     return (
-      <RadixTabs.Trigger ref={ref} className={cn(styles.trigger, className)} {...rest} />
+      <RadixTabs.Trigger
+        ref={ref}
+        className={cn(styles.trigger, className)}
+        {...rest}
+      />
     );
   },
 );

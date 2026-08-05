@@ -6,8 +6,10 @@ import { cn } from "../../utilities/cn";
 import { Button, type ButtonProps } from "../button/button";
 import styles from "./icon-button.module.css";
 
-export interface IconButtonProps
-  extends Omit<ButtonProps, "leftIcon" | "rightIcon" | "fullWidth" | "children"> {
+export interface IconButtonProps extends Omit<
+  ButtonProps,
+  "leftIcon" | "rightIcon" | "fullWidth" | "children"
+> {
   /** The icon to render. Hidden from assistive technology. */
   icon: React.ReactNode;
   /**
@@ -26,20 +28,12 @@ export interface IconButtonProps
  * behaviour.
  */
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  function IconButton(
-    { icon, round = false, size = "md", className, ...rest },
-    ref,
-  ) {
+  function IconButton({ icon, round = false, size = "md", className, ...rest }, ref) {
     return (
       <Button
         ref={ref}
         size={size}
-        className={cn(
-          styles.root,
-          styles[size],
-          round && styles.round,
-          className,
-        )}
+        className={cn(styles.root, styles[size], round && styles.round, className)}
         {...rest}
       >
         <span aria-hidden="true">{icon}</span>

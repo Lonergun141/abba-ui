@@ -1,0 +1,359 @@
+/* ------------------------------------------------------------- code block */
+
+.codeBlock {
+  position: relative;
+  margin-block: var(--abba-space-4);
+}
+
+.pre {
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--abba-space-4);
+  padding-inline-end: var(--abba-space-12);
+  background-color: var(--abba-neutral-900);
+  border: 1px solid var(--abba-neutral-800);
+  border-radius: var(--abba-radius-md);
+  color: var(--abba-neutral-100);
+  font-family: var(--abba-font-mono);
+  font-size: var(--abba-font-size-sm);
+  line-height: var(--abba-line-height-normal);
+  /* Long lines scroll inside the block; the page body never scrolls. */
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.copyButton {
+  position: absolute;
+  inset-block-start: var(--abba-space-2);
+  inset-inline-end: var(--abba-space-2);
+}
+
+/* ---------------------------------------------------------------- preview */
+
+.preview {
+  margin-block: var(--abba-space-5);
+  border: 1px solid var(--abba-border-subtle);
+  border-radius: var(--abba-radius-lg);
+  overflow: hidden;
+}
+
+.previewHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--abba-space-3);
+  padding: var(--abba-space-3) var(--abba-space-4);
+  border-block-end: 1px solid var(--abba-border-subtle);
+  background-color: var(--abba-background-subtle);
+}
+
+.previewTitle {
+  margin: 0;
+  font-size: var(--abba-font-size-sm);
+  font-weight: var(--abba-font-weight-semibold);
+}
+
+.previewDescription {
+  margin: var(--abba-space-1) 0 0;
+  color: var(--abba-muted-foreground);
+  font-size: var(--abba-font-size-xs);
+}
+
+.previewStage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--abba-space-4);
+  padding: var(--abba-space-6) var(--abba-space-4);
+  background-color: var(--abba-background);
+  /* Wide demos scroll inside the stage rather than widening the page. */
+  overflow-x: auto;
+}
+
+.previewStage > * {
+  min-inline-size: 0;
+}
+
+.previewCode {
+  border-block-start: 1px solid var(--abba-border-subtle);
+}
+
+.previewCode .codeBlock {
+  margin: 0;
+}
+
+.previewCode .pre {
+  border: 0;
+  border-radius: 0;
+}
+
+.previewToggle {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--abba-space-2) var(--abba-space-3);
+  border-block-start: 1px solid var(--abba-border-subtle);
+  background-color: var(--abba-background-subtle);
+}
+
+/* ------------------------------------------------------------ props table */
+
+.tableWrap {
+  margin-block: var(--abba-space-4);
+  border: 1px solid var(--abba-border-subtle);
+  border-radius: var(--abba-radius-md);
+  overflow-x: auto;
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: var(--abba-font-size-sm);
+}
+
+.table caption {
+  padding: var(--abba-space-3) var(--abba-space-4);
+  border-block-end: 1px solid var(--abba-border-subtle);
+  background-color: var(--abba-background-subtle);
+  color: var(--abba-muted-foreground);
+  font-size: var(--abba-font-size-xs);
+  text-align: start;
+}
+
+.table th,
+.table td {
+  padding: var(--abba-space-3) var(--abba-space-4);
+  border-block-end: 1px solid var(--abba-border-subtle);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table tbody tr:last-child th,
+.table tbody tr:last-child td {
+  border-block-end: 0;
+}
+
+.table thead th {
+  background-color: var(--abba-background-subtle);
+  font-size: var(--abba-font-size-xs);
+  font-weight: var(--abba-font-weight-semibold);
+  letter-spacing: var(--abba-letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--abba-muted-foreground);
+  white-space: nowrap;
+}
+
+.propName {
+  font-family: var(--abba-font-mono);
+  font-weight: var(--abba-font-weight-medium);
+  white-space: nowrap;
+}
+
+.propType {
+  color: var(--abba-primary);
+  font-family: var(--abba-font-mono);
+  font-size: var(--abba-font-size-xs);
+}
+
+.propDefault {
+  color: var(--abba-muted-foreground);
+  font-family: var(--abba-font-mono);
+  font-size: var(--abba-font-size-xs);
+  white-space: nowrap;
+}
+
+.requiredMark {
+  color: var(--abba-danger);
+}
+
+/* --------------------------------------------------------- accessibility */
+
+.a11y {
+  margin-block: var(--abba-space-5);
+  padding: var(--abba-space-5);
+  border: 1px solid var(--abba-success-border);
+  border-radius: var(--abba-radius-md);
+  background-color: var(--abba-success-subtle);
+  color: var(--abba-success-subtle-foreground);
+}
+
+.a11yTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--abba-space-2);
+  margin: 0 0 var(--abba-space-3);
+  font-size: var(--abba-font-size-sm);
+  font-weight: var(--abba-font-weight-semibold);
+}
+
+.a11yList {
+  margin: 0;
+  padding-inline-start: var(--abba-space-5);
+  font-size: var(--abba-font-size-sm);
+}
+
+.a11yList li {
+  margin-block-end: var(--abba-space-2);
+}
+
+.a11yList li:last-child {
+  margin-block-end: 0;
+}
+
+/* ------------------------------------------------------- install command */
+
+.install {
+  position: relative;
+  margin-block: var(--abba-space-4);
+}
+
+.installTabs {
+  display: flex;
+  gap: var(--abba-space-1);
+  margin-block-end: var(--abba-space-2);
+}
+
+/* ---------------------------------------------------------- token preview */
+
+.tokenGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: var(--abba-space-3);
+  margin-block: var(--abba-space-4);
+}
+
+.token {
+  display: flex;
+  align-items: center;
+  gap: var(--abba-space-3);
+  padding: var(--abba-space-3);
+  border: 1px solid var(--abba-border-subtle);
+  border-radius: var(--abba-radius-md);
+}
+
+.tokenSwatch {
+  flex-shrink: 0;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  border: 1px solid var(--abba-border-subtle);
+  border-radius: var(--abba-radius-sm);
+}
+
+.tokenMeta {
+  min-inline-size: 0;
+}
+
+.tokenName {
+  display: block;
+  font-family: var(--abba-font-mono);
+  font-size: var(--abba-font-size-xs);
+  overflow-wrap: anywhere;
+}
+
+.tokenValue {
+  display: block;
+  color: var(--abba-muted-foreground);
+  font-size: var(--abba-font-size-xs);
+}
+
+.sizeToken {
+  display: flex;
+  align-items: center;
+  gap: var(--abba-space-3);
+  padding-block: var(--abba-space-2);
+  border-block-end: 1px solid var(--abba-border-subtle);
+}
+
+.sizeBar {
+  block-size: 0.75rem;
+  border-radius: var(--abba-radius-sm);
+  background-color: var(--abba-primary);
+}
+
+/* -------------------------------------------------------------- misc bits */
+
+.exampleGrid {
+  display: grid;
+  gap: var(--abba-space-4);
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  margin-block: var(--abba-space-4);
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abba-space-2);
+  margin-block: var(--abba-space-4);
+}
+
+/* A wrapped row of badge-shaped links, used for the component chip lists. */
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abba-space-2);
+  margin-block: var(--abba-space-4);
+}
+
+.chipLink {
+  display: inline-flex;
+  border-radius: var(--abba-radius-full);
+  text-decoration: none;
+}
+
+.chipLink:focus-visible {
+  outline: var(--abba-focus-ring-width) solid var(--abba-focus-ring);
+  outline-offset: var(--abba-focus-ring-offset);
+}
+
+.chipLink:hover {
+  filter: brightness(0.96);
+}
+
+/* The component index. */
+.indexGroup {
+  margin-block-start: var(--abba-space-8);
+}
+
+.indexGrid {
+  display: grid;
+  gap: var(--abba-space-4);
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  margin-block-start: var(--abba-space-4);
+  list-style: none;
+  padding: 0;
+}
+
+.indexCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abba-space-2);
+  block-size: 100%;
+  padding: var(--abba-space-4) var(--abba-space-5);
+  border: 1px solid var(--abba-border-subtle);
+  border-radius: var(--abba-radius-lg);
+  background-color: var(--abba-background-raised);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color var(--abba-duration-fast) var(--abba-ease-standard),
+    box-shadow var(--abba-duration-fast) var(--abba-ease-standard);
+}
+
+.indexCard:hover {
+  border-color: var(--abba-border-strong);
+  box-shadow: var(--abba-shadow-sm);
+}
+
+.indexCard:focus-visible {
+  outline: var(--abba-focus-ring-width) solid var(--abba-focus-ring);
+  outline-offset: var(--abba-focus-ring-offset);
+}
+
+.indexName {
+  font-weight: var(--abba-font-weight-semibold);
+}
+
+.indexSummary {
+  color: var(--abba-muted-foreground);
+  font-size: var(--abba-font-size-sm);
+  line-height: var(--abba-line-height-normal);
+}

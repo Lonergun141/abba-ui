@@ -27,7 +27,10 @@ export interface FormMessageProps extends React.ComponentPropsWithoutRef<"p"> {
  * Server-renderable: presentation only, no state.
  */
 export const FormMessage = React.forwardRef<HTMLParagraphElement, FormMessageProps>(
-  function FormMessage({ tone = "description", live, className, children, ...rest }, ref) {
+  function FormMessage(
+    { tone = "description", live, className, children, ...rest },
+    ref,
+  ) {
     const isLive = live ?? tone === "error";
 
     return (

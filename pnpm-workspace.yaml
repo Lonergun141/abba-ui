@@ -4,21 +4,21 @@ packages:
   - "examples/*"
 
 minimumReleaseAgeExclude:
-  - '@rolldown/binding-android-arm64@1.2.2'
-  - '@rolldown/binding-linux-arm-gnueabihf@1.2.2'
-  - '@rolldown/binding-linux-arm64-musl@1.2.2'
-  - '@rolldown/binding-linux-x64-musl@1.2.2'
-  - '@testing-library/user-event@14.6.3'
-  - '@typescript-eslint/eslint-plugin@8.66.0'
-  - '@typescript-eslint/parser@8.66.0'
-  - '@typescript-eslint/project-service@8.66.0'
-  - '@typescript-eslint/scope-manager@8.66.0'
-  - '@typescript-eslint/tsconfig-utils@8.66.0'
-  - '@typescript-eslint/type-utils@8.66.0'
-  - '@typescript-eslint/types@8.66.0'
-  - '@typescript-eslint/typescript-estree@8.66.0'
-  - '@typescript-eslint/utils@8.66.0'
-  - '@typescript-eslint/visitor-keys@8.66.0'
+  - "@rolldown/binding-android-arm64@1.2.2"
+  - "@rolldown/binding-linux-arm-gnueabihf@1.2.2"
+  - "@rolldown/binding-linux-arm64-musl@1.2.2"
+  - "@rolldown/binding-linux-x64-musl@1.2.2"
+  - "@testing-library/user-event@14.6.3"
+  - "@typescript-eslint/eslint-plugin@8.66.0"
+  - "@typescript-eslint/parser@8.66.0"
+  - "@typescript-eslint/project-service@8.66.0"
+  - "@typescript-eslint/scope-manager@8.66.0"
+  - "@typescript-eslint/tsconfig-utils@8.66.0"
+  - "@typescript-eslint/type-utils@8.66.0"
+  - "@typescript-eslint/types@8.66.0"
+  - "@typescript-eslint/typescript-estree@8.66.0"
+  - "@typescript-eslint/utils@8.66.0"
+  - "@typescript-eslint/visitor-keys@8.66.0"
   - typescript-eslint@8.66.0
 
 # pnpm >= 10 blocks dependency build scripts by default. These are the only

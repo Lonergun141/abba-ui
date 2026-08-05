@@ -108,7 +108,9 @@ describe("Tabs", () => {
         <TabsPanel value="a">A content</TabsPanel>
       </Tabs>,
     );
-    expect(container.querySelector('[role="tablist"]')?.className).toContain("enclosed");
+    expect(container.querySelector('[role="tablist"]')?.className).toContain(
+      "enclosed",
+    );
   });
 
   it("has no axe violations", async () => {

@@ -51,10 +51,13 @@ describe("Heading", () => {
     expect(screen.getByRole("heading", { level: 2 })).toBeInTheDocument();
   });
 
-  it.each([1, 2, 3, 4, 5, 6] as const)("renders level %s as the matching element", (level) => {
-    render(<Heading level={level}>Title</Heading>);
-    expect(screen.getByRole("heading", { level })).toBeInTheDocument();
-  });
+  it.each([1, 2, 3, 4, 5, 6] as const)(
+    "renders level %s as the matching element",
+    (level) => {
+      render(<Heading level={level}>Title</Heading>);
+      expect(screen.getByRole("heading", { level })).toBeInTheDocument();
+    },
+  );
 
   it("picks a default size from the level", () => {
     render(<Heading level={1}>Title</Heading>);

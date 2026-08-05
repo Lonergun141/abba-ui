@@ -5,13 +5,7 @@ import { VisuallyHidden } from "../visually-hidden/visually-hidden";
 import styles from "./badge.module.css";
 
 export type BadgeTone =
-  | "neutral"
-  | "primary"
-  | "accent"
-  | "success"
-  | "warning"
-  | "danger"
-  | "info";
+  "neutral" | "primary" | "accent" | "success" | "warning" | "danger" | "info";
 export type BadgeVariant = "subtle" | "solid" | "outline";
 
 export interface BadgeProps extends React.ComponentPropsWithoutRef<"span"> {
@@ -53,7 +47,13 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(function Badg
   return (
     <span
       ref={ref}
-      className={cn(styles.root, styles[variant], styles[tone], styles[size], className)}
+      className={cn(
+        styles.root,
+        styles[variant],
+        styles[tone],
+        styles[size],
+        className,
+      )}
       {...rest}
     >
       {srLabel ? <VisuallyHidden>{srLabel}</VisuallyHidden> : null}

@@ -1,0 +1,14 @@
+.trigger {
+  display: inline-flex;
+}
+
+@media (min-width: 64rem) {
+  .trigger {
+    display: none;
+  }
+}
+
+.panel {
+  max-block-size: min(32rem, 80vh);
+  overflow-y: auto;
+}

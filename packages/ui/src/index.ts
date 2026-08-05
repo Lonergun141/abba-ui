@@ -88,11 +88,7 @@ export { Spinner } from "./components/spinner";
 export type { SpinnerProps } from "./components/spinner";
 
 export { ToastProvider, useToast } from "./components/toast";
-export type {
-  ToastOptions,
-  ToastProviderProps,
-  ToastTone,
-} from "./components/toast";
+export type { ToastOptions, ToastProviderProps, ToastTone } from "./components/toast";
 
 /* ---------------------------------------------------------------- overlays */
 export {

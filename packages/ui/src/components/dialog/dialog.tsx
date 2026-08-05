@@ -55,8 +55,9 @@ export const DialogClose = RadixDialog.Close;
 
 export type DialogSize = "sm" | "md" | "lg" | "xl";
 
-export interface DialogContentProps
-  extends React.ComponentPropsWithoutRef<typeof RadixDialog.Content> {
+export interface DialogContentProps extends React.ComponentPropsWithoutRef<
+  typeof RadixDialog.Content
+> {
   /** Maximum width. Defaults to `md`. */
   size?: DialogSize;
   /** Renders the built-in close button. Defaults to `true`. */

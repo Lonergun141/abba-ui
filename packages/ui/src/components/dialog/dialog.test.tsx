@@ -142,7 +142,9 @@ describe("Dialog", () => {
   it("renders the built-in close button, and can omit it", async () => {
     const { unmount } = render(<Example />);
     await userEvent.click(screen.getByRole("button", { name: "Open dialog" }));
-    expect(await screen.findByRole("button", { name: "Close dialog" })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("button", { name: "Close dialog" }),
+    ).toBeInTheDocument();
     unmount();
 
     render(
@@ -152,7 +154,9 @@ describe("Dialog", () => {
         </DialogContent>
       </Dialog>,
     );
-    expect(screen.queryByRole("button", { name: "Close dialog" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Close dialog" }),
+    ).not.toBeInTheDocument();
   });
 
   it("supports controlled open state", async () => {
@@ -160,7 +164,12 @@ describe("Dialog", () => {
       const [open, setOpen] = React.useState(false);
       return (
         <>
-          <button type="button" onClick={() => { setOpen(true); }}>
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
             External open
           </button>
           <Dialog open={open} onOpenChange={setOpen}>

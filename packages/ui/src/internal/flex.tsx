@@ -13,13 +13,7 @@ import styles from "./flex.module.css";
  */
 
 export type FlexAlign = "start" | "center" | "end" | "stretch" | "baseline";
-export type FlexJustify =
-  | "start"
-  | "center"
-  | "end"
-  | "between"
-  | "around"
-  | "evenly";
+export type FlexJustify = "start" | "center" | "end" | "between" | "around" | "evenly";
 
 export type FlexElement =
   | "div"
@@ -69,9 +63,7 @@ export interface FlexOwnProps {
   fullWidth?: boolean;
 }
 
-export interface FlexProps
-  extends FlexOwnProps,
-    React.ComponentPropsWithoutRef<"div"> {
+export interface FlexProps extends FlexOwnProps, React.ComponentPropsWithoutRef<"div"> {
   direction: "row" | "column";
 }
 

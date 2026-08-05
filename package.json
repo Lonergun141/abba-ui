@@ -14,7 +14,7 @@
     "lint": "turbo lint",
     "typecheck": "turbo typecheck",
     "test": "turbo test",
-    "test:e2e": "turbo test:e2e",
+    "test:coverage": "turbo test:coverage",
     "test:package": "node scripts/test-package.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -22,7 +22,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo build --filter=@abbainitiative/ui && changeset publish",
-    "preflight": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm test:package"
+    "preflight": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm test:package"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.7.0",

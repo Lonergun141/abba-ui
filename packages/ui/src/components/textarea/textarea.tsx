@@ -38,12 +38,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <textarea
         ref={ref}
-        className={cn(
-          styles.root,
-          resizeClass,
-          autoSize && styles.autoSize,
-          className,
-        )}
+        className={cn(styles.root, resizeClass, autoSize && styles.autoSize, className)}
         aria-invalid={invalid || undefined}
         {...rest}
       />
