@@ -20,7 +20,7 @@ import { CodeBlock } from "@/components/docs/code-block";
 import { InstallationCommand } from "@/components/docs/installation-command";
 import styles from "@/components/landing/landing.module.css";
 import { ThemePlayground } from "@/components/landing/theme-playground";
-import { components } from "@/content/registry";
+import { components } from "@abbainitiative/registry";
 import { PACKAGE_NAME, PACKAGE_VERSION } from "@/content/site";
 
 const SETUP = `// app/layout.tsx

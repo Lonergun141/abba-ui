@@ -1,4 +1,4 @@
-import type { ComponentDoc } from "../types";
+import type { ComponentDoc } from "../types.js";
 
 /** Actions and form controls. These establish client boundaries. */
 export const controlComponents: ComponentDoc[] = [

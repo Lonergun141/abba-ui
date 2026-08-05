@@ -1,8 +1,8 @@
-import { CATEGORY_ORDER, type ComponentCategory, type ComponentDoc } from "../types";
-import { controlComponents } from "./controls";
-import { layoutComponents } from "./layout";
-import { surfaceComponents } from "./surfaces";
-import { typographyComponents } from "./typography";
+import { CATEGORY_ORDER, type ComponentCategory, type ComponentDoc } from "../types.js";
+import { controlComponents } from "./controls.js";
+import { layoutComponents } from "./layout.js";
+import { surfaceComponents } from "./surfaces.js";
+import { typographyComponents } from "./typography.js";
 
 /** Every documented component, in category order. */
 export const components: ComponentDoc[] = [

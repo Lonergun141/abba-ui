@@ -14,8 +14,6 @@ React components for Next.js and plain React. No Tailwind, no provider, no confi
 pnpm add @abbainitiative/ui
 ```
 
-<sub>`npm install @abbainitiative/ui` · `yarn add @abbainitiative/ui` · `bun add @abbainitiative/ui`</sub>
-
 ### 2. Import the stylesheet once
 
 **Next.js** — in `app/layout.tsx`:
@@ -287,6 +285,26 @@ Every component also has its own entry point, if you prefer the narrower import:
 import { Badge } from "@abbainitiative/ui/badge";
 ```
 
+## Using it with a coding agent
+
+There's an MCP server, so Claude Code, Codex and friends can look up real components and tokens instead of guessing at prop names.
+
+**Claude Code:**
+
+```bash
+claude mcp add abba-ui -- npx -y @abbainitiative/mcp
+```
+
+**Codex** — in `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.abba-ui]
+command = "npx"
+args = ["-y", "@abbainitiative/mcp"]
+```
+
+The agent can then ask what props `Dialog` takes, search for "modal" or "loading", read the token list, and get theming instructions for light and dark. All read-only. See [`packages/mcp`](./packages/mcp) for the full tool list and other clients.
+
 ## Requirements
 
 React 18.2 or 19. Your `tsconfig.json` needs `"moduleResolution": "bundler"` (or `node16`/`nodenext`).
@@ -302,11 +320,13 @@ pnpm dev       # library watch + docs site on :3000
 pnpm preflight # everything CI runs
 ```
 
-| Path                       |                             |
-| -------------------------- | --------------------------- |
-| `packages/ui`              | the published library       |
-| `apps/docs`                | the documentation site      |
-| `scripts/test-package.mjs` | verifies the packed tarball |
+| Path                       |                                              |
+| -------------------------- | -------------------------------------------- |
+| `packages/ui`              | the published library                        |
+| `packages/registry`        | component and token metadata, as typed data  |
+| `packages/mcp`             | MCP server, so agents can query the registry |
+| `apps/docs`                | the documentation site                       |
+| `scripts/test-package.mjs` | verifies the packed tarball                  |
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) to add a component.
 

@@ -4,7 +4,7 @@ import type * as React from "react";
 
 import { CodeBlock } from "@/components/docs/code-block";
 import { PageNav } from "@/components/docs/page-nav";
-import { components } from "@/content/registry";
+import { components } from "@abbainitiative/registry";
 
 export const metadata: Metadata = {
   title: "Accessibility",

@@ -12,6 +12,7 @@
     "clean": "rimraf .next .turbo"
   },
   "dependencies": {
+    "@abbainitiative/registry": "workspace:*",
     "@abbainitiative/ui": "workspace:*",
     "next": "16.3.0",
     "react": "19.2.8",

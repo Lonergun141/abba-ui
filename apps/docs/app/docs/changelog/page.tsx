@@ -5,7 +5,7 @@ import type * as React from "react";
 
 import { CodeBlock } from "@/components/docs/code-block";
 import { PageNav } from "@/components/docs/page-nav";
-import { components } from "@/content/registry";
+import { components } from "@abbainitiative/registry";
 import { GITHUB_URL, PACKAGE_VERSION } from "@/content/site";
 
 export const metadata: Metadata = {

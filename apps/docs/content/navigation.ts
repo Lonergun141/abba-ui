@@ -1,4 +1,4 @@
-import { componentsByCategory } from "./registry";
+import { componentsByCategory } from "@abbainitiative/registry";
 
 export interface NavItem {
   title: string;

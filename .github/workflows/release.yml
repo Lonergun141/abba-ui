@@ -40,9 +40,6 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: pnpm
-          # Points npm at the public registry and wires NODE_AUTH_TOKEN, which
-          # `changeset publish` reads. The token itself comes from the secret
-          # below and is never written to the repository.
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
@@ -83,6 +80,11 @@ jobs:
       # Skipped rather than failed when the secret is absent. Without this the
       # job dies on an unauthenticated PUT, which the registry answers with a
       # 404 for a scoped package — a misleading error for a missing token.
+      # `changeset publish` reads `packageManager` from the root manifest, finds
+      # pnpm, and shells out to `pnpm publish` — which rewrites `workspace:*`
+      # dependency ranges to real versions as it packs. A plain `npm pack` does
+      # not, so a tarball built by hand will show `workspace:*` and look broken.
+      # It is not: do not "fix" it by hardcoding versions in the manifests.
       - name: Create a release PR, or publish
         if: steps.npm.outputs.has-token == 'true'
         uses: changesets/action@v1

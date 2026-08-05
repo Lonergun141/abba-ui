@@ -1,4 +1,4 @@
-import type { ComponentDoc } from "../types";
+import type { ComponentDoc } from "../types.js";
 
 /** Layout and typography primitives. All render on the server. */
 export const layoutComponents: ComponentDoc[] = [
