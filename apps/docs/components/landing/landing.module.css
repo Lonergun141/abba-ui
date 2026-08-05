@@ -321,6 +321,36 @@
   font-size: 0.9em;
 }
 
+.mcpCallout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--abba-space-8);
+  padding: var(--abba-space-6);
+  border: 1px solid var(--abba-primary);
+  border-radius: var(--abba-radius-lg);
+  background: var(--abba-primary-subtle);
+}
+
+.mcpCopy {
+  max-inline-size: 58ch;
+  margin: var(--abba-space-3) 0 0;
+  color: var(--abba-primary-subtle-foreground);
+  line-height: var(--abba-line-height-relaxed);
+}
+
+.mcpCopy code {
+  font-family: var(--abba-font-mono);
+  font-size: 0.9em;
+}
+
+@media (max-width: 52rem) {
+  .mcpCallout {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 /* -------------------------------------------------------------- specimens */
 
 .specimens {

@@ -234,6 +234,36 @@ export default function LandingPage(): React.JSX.Element {
         <CodeBlock code={SETUP} />
       </section>
 
+      <section className={styles.section} aria-labelledby="mcp-heading">
+        <div className={styles.sectionHead}>
+          <h2 className={styles.sectionTitle} id="mcp-heading">
+            Let your coding agent ask the system.
+          </h2>
+          <p className={styles.sectionNote}>
+            The ABBA UI MCP server gives Claude Code, Codex, Cursor and other agents the
+            real component props, token names and setup guidance.
+          </p>
+        </div>
+
+        <div className={styles.mcpCallout}>
+          <div>
+            <span className={styles.specimenLabel}>Model Context Protocol</span>
+            <p className={styles.mcpCopy}>
+              Install the read-only server with <code>npx</code>. It uses the same
+              catalogue as these docs, so agents stop inventing plausible APIs.
+            </p>
+          </div>
+          <Inline gap={3}>
+            <Button asChild>
+              <Link href="/docs/mcp">Connect an agent</Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href="/docs/installation">Install the UI</Link>
+            </Button>
+          </Inline>
+        </div>
+      </section>
+
       <section className={styles.section} aria-labelledby="index-heading">
         <div className={styles.sectionHead}>
           <h2 className={styles.sectionTitle} id="index-heading">
