@@ -22,10 +22,23 @@
   white-space: pre;
 }
 
+/*
+ * The code block is a fixed dark surface in both themes, but the ghost Button
+ * inside it takes its colour from --abba-foreground, which is near-black in the
+ * light theme — leaving the control invisible against the block it sits on.
+ *
+ * Re-point the tokens for this subtree rather than overriding the button's own
+ * classes: the control then follows the surface it is actually on instead of
+ * the page theme, and it keeps working if the button's internals change.
+ */
 .copyButton {
   position: absolute;
   inset-block-start: var(--abba-space-2);
   inset-inline-end: var(--abba-space-2);
+
+  --abba-foreground: var(--abba-neutral-100);
+  --abba-muted: color-mix(in srgb, var(--abba-neutral-100) 15%, transparent);
+  --abba-focus-ring: var(--abba-cedar-300);
 }
 
 /* ---------------------------------------------------------------- preview */

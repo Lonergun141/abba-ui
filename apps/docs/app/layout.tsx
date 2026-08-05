@@ -9,6 +9,7 @@ import type * as React from "react";
 
 import { MobileNav } from "@/components/site/mobile-nav";
 import { ThemeScript } from "@/components/site/theme-script";
+import { body, display, mono } from "./fonts";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import {
   DOCS_URL,
@@ -61,7 +62,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }): React.JSX.Element {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      // The font variables are declared here and consumed by globals.css, which
+      // points --abba-font-sans and --abba-font-mono at them. That is the
+      // library's documented theming path, used on its own documentation.
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+    >
       <head>
         <ThemeScript />
       </head>

@@ -6,6 +6,22 @@
  * missing rather than a reason to reach for a one-off value.
  */
 
+/*
+ * Repoint the library's type tokens at the faces this site loads. The library
+ * downloads no webfont of its own and resolves --abba-font-sans to the platform
+ * stack; overriding it here is exactly the theming path the docs describe, so
+ * the site's typography is a demonstration rather than an exception.
+ *
+ * --docs-font-display is the site's own token. The library has no display role,
+ * and inventing an --abba- name for one would imply an API that does not exist.
+ */
+:root {
+  --abba-font-sans:
+    var(--font-body), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --abba-font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --docs-font-display: var(--font-display), var(--abba-font-sans);
+}
+
 *,
 *::before,
 *::after {
@@ -315,80 +331,6 @@ body {
 .dataTable code {
   font-family: var(--abba-font-mono);
   font-size: 0.85em;
-}
-
-/* ----------------------------------------------------------------- landing */
-
-.landing {
-  flex: 1;
-  inline-size: 100%;
-  max-inline-size: 68rem;
-  margin-inline: auto;
-  padding: var(--abba-space-12) var(--abba-space-5) var(--abba-space-20);
-}
-
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--abba-space-5);
-  padding-block: var(--abba-space-6) var(--abba-space-10);
-}
-
-.heroTitle {
-  margin: 0;
-  max-inline-size: 20ch;
-  font-size: clamp(2.25rem, 1.5rem + 3vw, var(--abba-font-size-4xl));
-  font-weight: var(--abba-font-weight-bold);
-  line-height: var(--abba-line-height-tight);
-  letter-spacing: var(--abba-letter-spacing-tight);
-  text-wrap: balance;
-}
-
-.heroLead {
-  margin: 0;
-  max-inline-size: 60ch;
-  color: var(--abba-muted-foreground);
-  font-size: var(--abba-font-size-lg);
-  line-height: var(--abba-line-height-relaxed);
-  text-wrap: pretty;
-}
-
-.heroActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--abba-space-3);
-  margin-block-start: var(--abba-space-2);
-}
-
-.heroInstall {
-  inline-size: 100%;
-  max-inline-size: 34rem;
-  margin-block-start: var(--abba-space-4);
-}
-
-.landingSection {
-  margin-block-start: var(--abba-space-16);
-}
-
-.landingSectionTitle {
-  margin: 0 0 var(--abba-space-3);
-  font-size: var(--abba-font-size-2xl);
-  font-weight: var(--abba-font-weight-semibold);
-  letter-spacing: var(--abba-letter-spacing-tight);
-}
-
-.landingSectionLead {
-  margin: 0 0 var(--abba-space-6);
-  max-inline-size: 60ch;
-  color: var(--abba-muted-foreground);
-}
-
-.featureGrid {
-  display: grid;
-  gap: var(--abba-space-4);
-  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-  margin-block-start: var(--abba-space-6);
 }
 
 /* -------------------------------------------------------------- footer nav */
