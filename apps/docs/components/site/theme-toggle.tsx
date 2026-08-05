@@ -3,52 +3,17 @@
 import { IconButton } from "@abbainitiative/ui";
 import * as React from "react";
 
-type Theme = "light" | "dark";
-
-/**
- * Watches the `data-theme` attribute on <html>.
- *
- * The attribute is the source of truth — a blocking script in <head> sets it
- * before first paint, so re-deriving the preference here would give us a second
- * answer that can disagree with the page it is describing. A MutationObserver
- * subscription means the button also stays correct if anything else changes the
- * theme.
- */
-function subscribe(onStoreChange: () => void): () => void {
-  const observer = new MutationObserver(onStoreChange);
-  observer.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["data-theme"],
-  });
-  return () => {
-    observer.disconnect();
-  };
-}
-
-function getSnapshot(): Theme | null {
-  return document.documentElement.getAttribute("data-theme") === "dark"
-    ? "dark"
-    : "light";
-}
-
-/**
- * On the server the theme is genuinely unknown: it depends on localStorage and
- * a media query, neither of which exists during rendering. `null` says so
- * honestly, and the button falls back to a neutral label rather than announcing
- * something that is wrong half the time.
- */
-function getServerSnapshot(): Theme | null {
-  return null;
-}
+import { type Theme, useTheme } from "./use-theme";
 
 /**
  * Switches between the light and dark token sets.
  *
  * Writes `data-theme` on <html>, which is one of the two selectors the library
- * ships dark mode under.
+ * ships dark mode under. The current value is read back through useTheme rather
+ * than kept in local state, so the button can never disagree with the page.
  */
 export function ThemeToggle(): React.JSX.Element {
-  const theme = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const theme = useTheme();
 
   const toggle = React.useCallback(() => {
     const next: Theme = theme === "dark" ? "light" : "dark";

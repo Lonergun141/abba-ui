@@ -10,30 +10,26 @@ import {
   Heading,
   Inline,
   Input,
-  Stack,
   Text,
+  Textarea,
 } from "@abbainitiative/ui";
 import Link from "next/link";
 import type * as React from "react";
 
+import { CodeBlock } from "@/components/docs/code-block";
 import { InstallationCommand } from "@/components/docs/installation-command";
-import { BoundaryTree } from "@/components/landing/boundary-tree";
 import styles from "@/components/landing/landing.module.css";
+import { ThemePlayground } from "@/components/landing/theme-playground";
 import { components } from "@/content/registry";
-import { PACKAGE_VERSION } from "@/content/site";
+import { PACKAGE_NAME, PACKAGE_VERSION } from "@/content/site";
 
-/**
- * The landing page.
- *
- * Note the imports: Card, Badge, Heading, Stack and the rest render on the
- * server from this file, with no client boundary of its own. Only BoundaryTree
- * and InstallationCommand are client modules, because only they hold state.
- * The page is an instance of the thing it argues for.
- */
+const SETUP = `// app/layout.tsx
+import "${PACKAGE_NAME}/styles.css";
+
+// Then anywhere, including Server Components:
+import { Button, Card } from "${PACKAGE_NAME}";`;
 
 export default function LandingPage(): React.JSX.Element {
-  const clientComponents = components.filter((component) => !component.serverSafe);
-
   return (
     <main id="main-content" className={styles.page}>
       <section className={styles.hero}>
@@ -43,53 +39,79 @@ export default function LandingPage(): React.JSX.Element {
         </p>
 
         <h1 className={styles.headline}>
-          One import shouldn&apos;t cost you{" "}
-          <span className={styles.headlineTurn}>the server</span>.
+          A component library you can make{" "}
+          <span className={styles.headlineTurn}>look like yours</span>.
         </h1>
 
-        <div className={styles.heroGrid}>
-          <div>
-            <p className={styles.heroLead}>
-              Most component libraries put <code>&quot;use client&quot;</code> at the
-              top of their barrel file. Import one button and your whole layout crosses
-              into the client bundle. ABBA UI puts it on the {clientComponents.length}{" "}
-              components that genuinely need it, and nowhere else.
-            </p>
+        <p className={styles.heroLead}>
+          {components.length} accessible React components for Next.js and plain React.
+          Install the package, import one stylesheet, and change any colour, size or
+          radius by overriding a CSS variable.
+        </p>
 
-            <div className={styles.heroActions}>
-              <Button size="lg" asChild>
-                <Link href="/docs">Read the docs</Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/docs/components">
-                  Browse {components.length} components
-                </Link>
-              </Button>
-            </div>
+        <div className={styles.heroActions}>
+          <Button size="lg" asChild>
+            <Link href="/docs/installation">Get started</Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="/docs/components">Browse components</Link>
+          </Button>
+        </div>
 
-            <div className={styles.heroInstall}>
-              <InstallationCommand />
-            </div>
-          </div>
-
-          <BoundaryTree />
+        <div className={styles.heroInstall}>
+          <InstallationCommand />
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="specimens-heading">
+      <ul className={styles.claims}>
+        <li className={styles.claim}>
+          <span className={styles.claimTerm}>One stylesheet</span>
+          <span className={styles.claimDetail}>
+            No Tailwind, no PostCSS plugin, nothing to configure.
+          </span>
+        </li>
+        <li className={styles.claim}>
+          <span className={styles.claimTerm}>No provider</span>
+          <span className={styles.claimDetail}>
+            Theming is plain CSS, so there is nothing to mount.
+          </span>
+        </li>
+        <li className={styles.claim}>
+          <span className={styles.claimTerm}>Server Components</span>
+          <span className={styles.claimDetail}>
+            Drop them straight into a Next.js layout or page.
+          </span>
+        </li>
+      </ul>
+
+      <section className={styles.section} aria-labelledby="theme-heading">
         <div className={styles.sectionHead}>
-          <h2 className={styles.sectionTitle} id="specimens-heading">
-            These are the components, not pictures of them.
+          <h2 className={styles.sectionTitle} id="theme-heading">
+            Change two things. Watch everything follow.
           </h2>
           <p className={styles.sectionNote}>
-            Everything below is rendered by the published package, in this page, at the
-            size you are reading it. Switch the theme in the header and watch it follow.
+            Pick an accent and a corner style below. The components are real, and so is
+            the CSS — it is the same override you would put in your own stylesheet.
+          </p>
+        </div>
+
+        <ThemePlayground />
+      </section>
+
+      <section className={styles.section} aria-labelledby="components-heading">
+        <div className={styles.sectionHead}>
+          <h2 className={styles.sectionTitle} id="components-heading">
+            Buttons, forms, cards, feedback.
+          </h2>
+          <p className={styles.sectionNote}>
+            Everything on this page is the published package rendering live. Switch the
+            theme in the header to see the dark set.
           </p>
         </div>
 
         <div className={styles.specimens}>
           <div className={styles.specimen}>
-            <span className={styles.specimenLabel}>Actions</span>
+            <span className={styles.specimenLabel}>Buttons</span>
             <div className={styles.specimenStage}>
               <Inline gap={2}>
                 <Button>Save</Button>
@@ -111,7 +133,7 @@ export default function LandingPage(): React.JSX.Element {
           </div>
 
           <div className={styles.specimen}>
-            <span className={styles.specimenLabel}>Forms</span>
+            <span className={styles.specimenLabel}>Form fields</span>
             <div className={styles.specimenStage}>
               <FormField
                 label="Email address"
@@ -127,11 +149,30 @@ export default function LandingPage(): React.JSX.Element {
           </div>
 
           <div className={styles.specimen}>
-            <span className={styles.specimenLabel}>Feedback</span>
+            <span className={styles.specimenLabel}>Validation</span>
+            <div className={styles.specimenStage}>
+              <FormField label="Username" error="That username is already taken.">
+                <Input defaultValue="ada" />
+              </FormField>
+              <Textarea aria-label="Notes" placeholder="Add a note…" />
+            </div>
+          </div>
+
+          <div className={styles.specimen}>
+            <span className={styles.specimenLabel}>Messages</span>
             <div className={styles.specimenStage}>
               <Alert tone="danger" title="Payment failed">
                 Update your card details to continue.
               </Alert>
+              <Alert tone="success" title="Saved">
+                Your changes are live.
+              </Alert>
+            </div>
+          </div>
+
+          <div className={styles.specimen}>
+            <span className={styles.specimenLabel}>Status</span>
+            <div className={styles.specimenStage}>
               <Inline gap={2}>
                 <Badge tone="success" dot>
                   Active
@@ -141,11 +182,22 @@ export default function LandingPage(): React.JSX.Element {
                   Overdue
                 </Badge>
               </Inline>
+              <Inline gap={2}>
+                <Badge tone="primary" variant="subtle">
+                  subtle
+                </Badge>
+                <Badge tone="primary" variant="solid">
+                  solid
+                </Badge>
+                <Badge tone="primary" variant="outline">
+                  outline
+                </Badge>
+              </Inline>
             </div>
           </div>
 
           <div className={styles.specimen}>
-            <span className={styles.specimenLabel}>Surfaces</span>
+            <span className={styles.specimenLabel}>Cards</span>
             <div className={styles.specimenStage}>
               <Card variant="elevated">
                 <CardHeader>
@@ -165,58 +217,31 @@ export default function LandingPage(): React.JSX.Element {
               </Card>
             </div>
           </div>
-
-          <div className={styles.specimen}>
-            <span className={styles.specimenLabel}>Typography</span>
-            <div className={styles.specimenStage}>
-              <Stack gap={2}>
-                <Heading level={3} size="lg">
-                  Rank and size are separate
-                </Heading>
-                <Text>
-                  So an <code>h3</code> can look large without lying about the document
-                  outline.
-                </Text>
-                <Text size="sm" tone="muted">
-                  Muted supporting copy.
-                </Text>
-              </Stack>
-            </div>
-          </div>
-
-          <div className={styles.specimen}>
-            <span className={styles.specimenLabel}>Theming</span>
-            <div className={styles.specimenStage}>
-              <Stack gap={3}>
-                <Text size="sm" tone="muted">
-                  Every colour, size and radius is a CSS variable. Override the ones you
-                  want and the whole system follows.
-                </Text>
-                <Inline gap={2}>
-                  <Badge tone="primary" variant="subtle">
-                    subtle
-                  </Badge>
-                  <Badge tone="primary" variant="solid">
-                    solid
-                  </Badge>
-                  <Badge tone="primary" variant="outline">
-                    outline
-                  </Badge>
-                </Inline>
-              </Stack>
-            </div>
-          </div>
         </div>
+      </section>
+
+      <section className={styles.section} aria-labelledby="setup-heading">
+        <div className={styles.sectionHead}>
+          <h2 className={styles.sectionTitle} id="setup-heading">
+            Two imports, then you&apos;re building.
+          </h2>
+          <p className={styles.sectionNote}>
+            Import the stylesheet once at the root of your app. After that, components
+            go wherever you need them.
+          </p>
+        </div>
+
+        <CodeBlock code={SETUP} />
       </section>
 
       <section className={styles.section} aria-labelledby="index-heading">
         <div className={styles.sectionHead}>
           <h2 className={styles.sectionTitle} id="index-heading">
-            The whole set.
+            All {components.length} components.
           </h2>
           <p className={styles.sectionNote}>
-            {components.length} components. {clientComponents.length} of them carry a
-            client boundary; the rest render on the server with nothing asked of you.
+            Each page has live examples, the full prop reference, and the keyboard and
+            screen-reader behaviour that component guarantees.
           </p>
         </div>
 
@@ -228,76 +253,15 @@ export default function LandingPage(): React.JSX.Element {
                 href={`/docs/components/${component.slug}`}
               >
                 {component.name}
-                {component.serverSafe ? null : (
-                  <span className={styles.indexMark} aria-hidden="true" />
-                )}
               </Link>
             </li>
           ))}
         </ul>
-
-        <p className={styles.legend}>
-          <span className={styles.legendItem}>
-            <span className={styles.indexMark} aria-hidden="true" />
-            carries its own <code>&quot;use client&quot;</code>
-          </span>
-          <span className={styles.legendItem}>
-            everything else renders on the server
-          </span>
-        </p>
-      </section>
-
-      <section className={styles.section} aria-labelledby="facts-heading">
-        <div className={styles.sectionHead}>
-          <h2 className={styles.sectionTitle} id="facts-heading">
-            What it does not ask of you.
-          </h2>
-          <p className={styles.sectionNote}>
-            A component library becomes hard to live with through the things it demands
-            from the rest of your build. This one demands two imports.
-          </p>
-        </div>
-
-        <dl className={styles.facts}>
-          <div className={styles.fact}>
-            <dt className={styles.factTerm}>No Tailwind</dt>
-            <dd className={styles.factDetail}>
-              Styles ship as one compiled stylesheet built on CSS custom properties. No
-              PostCSS plugin to register, no content-scanning config to keep in sync
-              with how you lay out your source.
-            </dd>
-          </div>
-          <div className={styles.fact}>
-            <dt className={styles.factTerm}>No provider</dt>
-            <dd className={styles.factDetail}>
-              Theming is a stylesheet override, so there is nothing to mount, no runtime
-              cost, and it works unchanged inside Server Components.
-            </dd>
-          </div>
-          <div className={styles.fact}>
-            <dt className={styles.factTerm}>
-              No <code>transpilePackages</code>
-            </dt>
-            <dd className={styles.factDetail}>
-              The package ships compiled ESM with the directives already in place. This
-              site consumes that build directly, so a regression in the published
-              artefact breaks the page you are reading.
-            </dd>
-          </div>
-          <div className={styles.fact}>
-            <dt className={styles.factTerm}>No accessibility backlog</dt>
-            <dd className={styles.factDetail}>
-              Keyboard interaction, focus management and ARIA relationships ship with
-              each component and are asserted in tests, including an automated axe pass
-              in CI.
-            </dd>
-          </div>
-        </dl>
       </section>
 
       <section className={styles.cta} aria-labelledby="cta-heading">
         <h2 className={styles.ctaTitle} id="cta-heading">
-          Add it to a project.
+          Add it to your project.
         </h2>
         <div className={styles.ctaInstall}>
           <InstallationCommand />
@@ -307,10 +271,10 @@ export default function LandingPage(): React.JSX.Element {
             <Link href="/docs/installation">Installation</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/docs/nextjs">Next.js guide</Link>
+            <Link href="/docs/theming">Theming</Link>
           </Button>
           <Button variant="ghost" asChild>
-            <Link href="/docs/tokens">Design tokens</Link>
+            <Link href="/docs/accessibility">Accessibility</Link>
           </Button>
         </Inline>
       </section>

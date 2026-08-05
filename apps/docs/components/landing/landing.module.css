@@ -1,14 +1,12 @@
 /**
  * Landing page.
  *
- * Colour discipline: ember appears in exactly one role on this page — marking a
- * client boundary. It is the tags in the tree, the counter beneath it, and the
- * dots in the component index, and it is nowhere else. So the accent is not
- * decoration; on this page it means "this crosses into the client".
+ * The page is drawn entirely from the library's own tokens, in both themes.
+ * That is not thrift — a design system's front door that reaches for values
+ * outside the system is advertising a system nobody uses, including its author.
  *
- * Everything else is drawn with the library's own tokens, in both themes. The
- * one exception is the tree panel, which stays on cedar in light and dark
- * alike: it is the single loud element, and it should read the same either way.
+ * The one loud element is the theme playground. Everything around it is quiet
+ * so that the moment the accent changes is the thing you notice.
  */
 
 .page {
@@ -66,26 +64,9 @@
   color: var(--abba-primary);
 }
 
-.heroGrid {
-  display: grid;
-  gap: var(--abba-space-10);
-  margin-block-start: var(--abba-space-10);
-  align-items: start;
-}
-
-@media (min-width: 64rem) {
-  .heroGrid {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-    gap: var(--abba-space-12);
-    /* The tree is the taller column. Centring stops the copy from stranding a
-       block of empty space beneath it. */
-    align-items: center;
-  }
-}
-
 .heroLead {
-  margin: 0;
-  max-inline-size: 46ch;
+  margin: var(--abba-space-6) 0 0;
+  max-inline-size: 52ch;
   color: var(--abba-muted-foreground);
   font-size: var(--abba-font-size-lg);
   line-height: var(--abba-line-height-relaxed);
@@ -110,153 +91,191 @@
   margin-block-start: var(--abba-space-8);
 }
 
-/* ----------------------------------------------------------- boundary tree */
+/* ------------------------------------------------------------------ claims */
 
-.tree {
+/*
+ * Three short answers to "how much work is this?", set as a plain row rather
+ * than feature cards. Cards would promise more than three short sentences can
+ * pay off.
+ */
+.claims {
+  display: grid;
+  gap: 0;
   margin: 0;
-  /* A cedar hairline rather than the theme border token: in the dark theme the
-     panel and the page are both near-black, and only the green edge separates
-     them. */
-  border: 1px solid color-mix(in srgb, var(--abba-cedar-400) 22%, transparent);
+  padding: 0;
+  list-style: none;
+  border-block-start: 1px solid var(--abba-border-subtle);
+}
+
+@media (min-width: 52rem) {
+  .claims {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--abba-space-8);
+  }
+}
+
+.claim {
+  display: grid;
+  gap: var(--abba-space-1);
+  padding-block: var(--abba-space-5);
+  border-block-end: 1px solid var(--abba-border-subtle);
+}
+
+@media (min-width: 52rem) {
+  .claim {
+    border-block-end: 0;
+  }
+}
+
+.claimTerm {
+  font-weight: var(--abba-font-weight-semibold);
+}
+
+.claimDetail {
+  color: var(--abba-muted-foreground);
+  font-size: var(--abba-font-size-sm);
+  line-height: var(--abba-line-height-normal);
+}
+
+/* -------------------------------------------------------- theme playground */
+
+.playground {
+  border: 1px solid var(--abba-border-subtle);
   border-radius: var(--abba-radius-lg);
-  background-color: var(--abba-cedar-950);
-  box-shadow: var(--abba-shadow-lg);
+  background-color: var(--abba-background-subtle);
   overflow: hidden;
 }
 
-.treeHead {
+.controls {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--abba-space-3);
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--abba-space-4) var(--abba-space-5);
-  border-block-end: 1px solid color-mix(in srgb, var(--abba-cedar-300) 16%, transparent);
+  gap: var(--abba-space-6);
+  padding: var(--abba-space-5);
+  border-block-end: 1px solid var(--abba-border-subtle);
+  background-color: var(--abba-background);
 }
 
-.treeLabel {
-  color: color-mix(in srgb, var(--abba-cedar-200) 78%, transparent);
+.controlGroup {
+  display: grid;
+  gap: var(--abba-space-2);
+}
+
+.controlLabel {
+  color: var(--abba-muted-foreground);
   font-family: var(--abba-font-mono);
   font-size: var(--abba-font-size-xs);
   letter-spacing: var(--abba-letter-spacing-wide);
   text-transform: uppercase;
 }
 
-.treeToggle {
+.swatches {
   display: flex;
-  gap: 2px;
-  padding: 2px;
-  border-radius: var(--abba-radius-full);
-  background-color: color-mix(in srgb, var(--abba-cedar-300) 10%, transparent);
+  flex-wrap: wrap;
+  gap: var(--abba-space-2);
 }
 
-.treeToggleButton {
-  padding: 0.3rem 0.8rem;
-  border: 0;
-  border-radius: var(--abba-radius-full);
-  background: none;
-  color: color-mix(in srgb, var(--abba-cedar-100) 72%, transparent);
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--abba-space-2);
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--abba-border-subtle);
+  border-radius: var(--abba-radius-md);
+  background-color: var(--abba-background);
+  color: var(--abba-muted-foreground);
   font: inherit;
-  font-size: var(--abba-font-size-xs);
-  font-weight: var(--abba-font-weight-medium);
+  font-size: var(--abba-font-size-sm);
   cursor: pointer;
   transition:
-    background-color var(--abba-duration-fast) var(--abba-ease-standard),
+    border-color var(--abba-duration-fast) var(--abba-ease-standard),
     color var(--abba-duration-fast) var(--abba-ease-standard);
 }
 
-.treeToggleButton:hover {
-  color: var(--abba-cedar-50);
-}
-
-.treeToggleButton[aria-pressed="true"] {
-  background-color: var(--abba-cedar-700);
-  color: var(--abba-cedar-50);
-}
-
-.treeToggleButton:focus-visible {
-  outline: var(--abba-focus-ring-width) solid var(--abba-cedar-300);
-  outline-offset: 1px;
-}
-
-.treeBody {
-  overflow-x: auto;
-  padding: var(--abba-space-5);
-}
-
-.treeRows {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-family: var(--abba-font-mono);
-  font-size: var(--abba-font-size-sm);
-  line-height: 1.9;
-}
-
-.treeRow {
-  display: flex;
-  align-items: baseline;
-  gap: var(--abba-space-2);
-  white-space: nowrap;
-}
-
-.treeGlyph {
-  white-space: pre;
-  color: color-mix(in srgb, var(--abba-cedar-300) 38%, transparent);
-}
-
-.treeName {
-  color: var(--abba-cedar-100);
-}
-
-.treeEntry {
-  color: color-mix(in srgb, var(--abba-cedar-200) 60%, transparent);
+.swatch:hover {
+  border-color: var(--abba-border-strong);
+  color: var(--abba-foreground);
 }
 
 /*
- * The tag is the whole point of the diagram: eleven of them stacked down the
- * edge, or two. It is `aria-hidden` because the figcaption already states the
- * count, and eleven repetitions of the same string is not a useful reading.
+ * The selected control is marked by the border and the label weight, not by
+ * colour alone — the accent is the thing being previewed, so using it to also
+ * mean "selected" would make the control ambiguous the moment you change it.
  */
-.treeTag {
-  margin-inline-start: auto;
-  padding-inline-start: var(--abba-space-6);
-  color: var(--abba-ember-300);
-  font-size: var(--abba-font-size-xs);
-  opacity: 0;
-  transform: translateX(-0.35rem);
-  transition:
-    opacity var(--abba-duration-normal) var(--abba-ease-standard),
-    transform var(--abba-duration-normal) var(--abba-ease-standard);
+.swatch[aria-pressed="true"] {
+  border-color: var(--abba-foreground);
+  color: var(--abba-foreground);
+  font-weight: var(--abba-font-weight-semibold);
 }
 
-.treeTag[data-on="true"] {
-  opacity: 1;
-  transform: none;
+.swatch:focus-visible {
+  outline: var(--abba-focus-ring-width) solid var(--abba-focus-ring);
+  outline-offset: var(--abba-focus-ring-offset);
 }
 
-.treeCaption {
-  display: flex;
-  align-items: baseline;
-  gap: var(--abba-space-3);
-  padding: var(--abba-space-4) var(--abba-space-5) var(--abba-space-5);
-  border-block-start: 1px solid
-    color-mix(in srgb, var(--abba-cedar-300) 16%, transparent);
+.swatchChip {
+  inline-size: 0.85rem;
+  block-size: 0.85rem;
+  border-radius: var(--abba-radius-full);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 12%);
 }
 
-.treeCount {
-  color: var(--abba-ember-300);
-  font-family: var(--docs-font-display);
-  font-size: var(--abba-font-size-3xl);
-  font-weight: 700;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
+.playgroundBody {
+  display: grid;
+  gap: 0;
 }
 
-.treeCountLabel {
-  color: color-mix(in srgb, var(--abba-cedar-200) 76%, transparent);
+@media (min-width: 60rem) {
+  .playgroundBody {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.preview {
+  display: grid;
+  gap: var(--abba-space-5);
+  align-content: start;
+  padding: var(--abba-space-6);
+}
+
+/*
+ * Transitions are switched off inside the preview.
+ *
+ * Chrome keeps a transitioned property pinned to its previous value when the
+ * custom property behind it changes on an ancestor: switching accent left the
+ * primary button on the old colour indefinitely, while the badge — which has no
+ * transition on its background — updated immediately. Verified by setting
+ * `transition: none` on the stuck button, which corrected it on the same frame.
+ *
+ * This preview is a specimen, not an interaction demo, so removing the
+ * transitions costs a hover fade and buys a theme switch that is correct every
+ * time. `!important` is needed because these selectors tie with the library's
+ * own single-class rules on specificity, and chunk order is not ours to fix.
+ */
+.preview *,
+.preview *::before,
+.preview *::after {
+  transition: none !important;
+}
+
+.playgroundCode {
+  display: grid;
+  align-content: start;
+  gap: var(--abba-space-2);
+  padding: var(--abba-space-6);
+  border-block-start: 1px solid var(--abba-border-subtle);
+}
+
+@media (min-width: 60rem) {
+  .playgroundCode {
+    border-block-start: 0;
+    border-inline-start: 1px solid var(--abba-border-subtle);
+  }
+}
+
+.playgroundCodeLabel {
+  margin: 0;
+  color: var(--abba-muted-foreground);
   font-size: var(--abba-font-size-sm);
-  line-height: var(--abba-line-height-snug);
 }
 
 /* ------------------------------------------------------------- section base */
@@ -383,81 +402,6 @@
   border-radius: var(--abba-radius-sm);
 }
 
-/* Same meaning as the tags in the tree: this one crosses the boundary. */
-.indexMark {
-  inline-size: 0.34rem;
-  block-size: 0.34rem;
-  border-radius: var(--abba-radius-full);
-  background-color: var(--abba-accent);
-  transform: translateY(-0.35em);
-}
-
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--abba-space-5);
-  margin-block-start: var(--abba-space-8);
-  color: var(--abba-muted-foreground);
-  font-size: var(--abba-font-size-sm);
-}
-
-.legendItem {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--abba-space-2);
-}
-
-/* The mark is nudged up to sit against a cap-height baseline in the index.
-   Here it is vertically centred against body text, so drop the nudge. */
-.legendItem .indexMark {
-  transform: none;
-}
-
-.legendItem code {
-  font-family: var(--abba-font-mono);
-  font-size: 0.9em;
-}
-
-/* -------------------------------------------------------------- plain list */
-
-.facts {
-  display: grid;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.fact {
-  display: grid;
-  gap: var(--abba-space-1);
-  padding-block: var(--abba-space-5);
-  border-block-start: 1px solid var(--abba-border-subtle);
-}
-
-@media (min-width: 48rem) {
-  .fact {
-    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
-    gap: var(--abba-space-6);
-    align-items: baseline;
-  }
-}
-
-.factTerm {
-  margin: 0;
-  font-weight: var(--abba-font-weight-semibold);
-}
-
-.factDetail {
-  margin: 0;
-  color: var(--abba-muted-foreground);
-  line-height: var(--abba-line-height-relaxed);
-}
-
-.factDetail code {
-  font-family: var(--abba-font-mono);
-  font-size: 0.9em;
-}
-
 /* --------------------------------------------------------------------- cta */
 
 .cta {
@@ -490,11 +434,4 @@
   gap: var(--abba-space-5);
   justify-items: start;
   padding-block: var(--abba-space-20);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .treeTag {
-    transition-duration: 1ms;
-    transition-delay: 0ms !important;
-  }
 }
